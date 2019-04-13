@@ -15,7 +15,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"},"articleBody":"\n\n语法1Object.defineProperty(obj, prop, descriptor)\n参数\nobj: 要添加或者修改属性的对象（必须）\nprop: 要添加属性的名称（必须）\ndescriptor: 要被定义或修改的属性描述符（必须）\n\nDEMO\n1234567let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;\tvalue: 'cao'&#125;);console.log(person.name)  //  cao\n返回值\n返回传递给函数的对象。\n\nDescription\ndescriptor允许我们准确的描述要添加或者修改的属性。\n\ndescriptor可设置的属性有以下几个：\n\nconfigurable\n\n\n默认: false\n当值为true时，该属性不可修改或者删除。\n\n1234567891011let person = &#123;&#125;;Object.defineProperty(obj, 'name', &#123;    value: 'cao',    configurable: false&#125;)person.name = 'ccc';delete person.name;console.log(person.name);  // cao\n\nenumerable\n\n\n默认: false\n当值为true时，该属性才可以被枚举。\n\n12345678910let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;    value: 'cao',    configurable: false,    enumerable: true&#125;)for (let key in person) &#123;    console.log(key)\t// name&#125;\n\nvalue\n\n\n默认: undefined\n被添加或者修改的属性的值，该值可以是任意的JavaScript value (如 number, object, function, etc)。\n\n\nwritable\n\n\n默认: false\n当值为true时，value才可以被赋值运算符改变。\n\n12345678910let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;    value: 'cao',    configurable: false,    writable: false&#125;)person.name = 'ccc';\tconsole.log(person.name);\t// cao\n\nget\n\n\n默认: undefined\n给该属性提供getter方法，该方法返回属性值value，否则为undefined。\n\n\nset\n\n\n默认: undefined\n给该属性提供setter方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。\n","dateCreated":"2018-06-14T10:44:46+08:00","dateModified":"2019-04-04T13:59:35+08:00","datePublished":"2018-06-14T10:44:46+08:00","description":"Object.defineProperty()\nThe static method Object.defineProperty() defines a new property directly on an object, or modifies an existing property on an object, and returns the object.   – MDN通过Object.defineProperty()可以在一个对象上定义新的属性或者修改存在的属性，并最终返回该对象。","headline":"Object.defineProperty()","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2018/06/14/defineProperty/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"}},"url":"http://blog.caoqs.com/2018/06/14/defineProperty/","keywords":"Object.defineProperty"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"\n\n语法1Object.defineProperty(obj, prop, descriptor)\n参数\nobj: 要添加或者修改属性的对象（必须）\nprop: 要添加属性的名称（必须）\ndescriptor: 要被定义或修改的属性描述符（必须）\n\nDEMO\n1234567let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;\tvalue: 'cao'&#125;);console.log(person.name)  //  cao\n返回值\n返回传递给函数的对象。\n\nDescription\ndescriptor允许我们准确的描述要添加或者修改的属性。\n\ndescriptor可设置的属性有以下几个：\n\nconfigurable\n\n\n默认: false\n当值为true时，该属性不可修改或者删除。\n\n1234567891011let person = &#123;&#125;;Object.defineProperty(obj, 'name', &#123;    value: 'cao',    configurable: false&#125;)person.name = 'ccc';delete person.name;console.log(person.name);  // cao\n\nenumerable\n\n\n默认: false\n当值为true时，该属性才可以被枚举。\n\n12345678910let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;    value: 'cao',    configurable: false,    enumerable: true&#125;)for (let key in person) &#123;    console.log(key)\t// name&#125;\n\nvalue\n\n\n默认: undefined\n被添加或者修改的属性的值，该值可以是任意的JavaScript value (如 number, object, function, etc)。\n\n\nwritable\n\n\n默认: false\n当值为true时，value才可以被赋值运算符改变。\n\n12345678910let person = &#123;&#125;;Object.defineProperty(person, 'name', &#123;    value: 'cao',    configurable: false,    writable: false&#125;)person.name = 'ccc';\tconsole.log(person.name);\t// cao\n\nget\n\n\n默认: undefined\n给该属性提供getter方法，该方法返回属性值value，否则为undefined。\n\n\nset\n\n\n默认: undefined\n给该属性提供setter方法，如果没有 setter 则为 undefined。该方法将接受唯一参数，并将该参数的新值分配给该属性。\n","dateCreated":"2018-06-14T10:44:46+08:00","dateModified":"2019-04-04T13:59:35+08:00","datePublished":"2018-06-14T10:44:46+08:00","description":"Object.defineProperty()\nThe static method Object.defineProperty() defines a new property directly on an object, or modifies an existing property on an object, and returns the object.   – MDN通过Object.defineProperty()可以在一个对象上定义新的属性或者修改存在的属性，并最终返回该对象。","headline":"Object.defineProperty()","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2018/06/14/defineProperty/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2018/06/14/defineProperty/","keywords":"Object.defineProperty"}</script>
     <meta name="description" content="Object.defineProperty() The static method Object.defineProperty() defines a new property directly on an object, or modifies an existing property on an object, and returns the object.   – MDN通过Object.d">
 <meta name="keywords" content="Object.defineProperty">
 <meta property="og:type" content="blog">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"/>
+        <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
     
@@ -68,7 +68,7 @@
             <a class="header-right-picture " href="#about">
         
         
-            <img class="header-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img class="header-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
         </a>
     
@@ -86,11 +86,11 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
                 </a>
                 <h4 class="sidebar-profile-name">Cao qisen</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>程序猿</p>
+                    <h5 class="sidebar-profile-bio"><p>Web front-end development engineer.</p>
 </h5>
                 
             </div>
@@ -162,33 +162,6 @@
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/PiNuoC/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.facebook.com/qiye.cao.5/" target="_blank" rel="noopener" title="Facebook">
-                    
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="邮箱">
-                    
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">邮箱</span>
                     </a>
             </li>
             
@@ -322,7 +295,8 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/11/webhook/" data-tooltip="webhook配合node.js实现简单的自动化部署" aria-label="上一篇: webhook配合node.js实现简单的自动化部署">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -417,7 +391,8 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/11/webhook/" data-tooltip="webhook配合node.js实现简单的自动化部署" aria-label="上一篇: webhook配合node.js实现简单的自动化部署">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -534,18 +509,18 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img id="about-card-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
             <h4 id="about-card-name">Cao qisen</h4>
         
-            <div id="about-card-bio"><p>程序猿</p>
+            <div id="about-card-bio"><p>Web front-end development engineer.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>前端开发工程师</p>
+                <p>Web developer</p>
 
             </div>
         
@@ -663,7 +638,7 @@
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/11/html5-3/">
-                            <h3 class="media-heading">(译）理解浏览器的关键渲染路径</h3>
+                            <h3 class="media-heading">理解浏览器的关键渲染路径</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -709,25 +684,6 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/19/wepack-1/">
-                            <h3 class="media-heading">webpack2配置sass</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月19日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><h4 id="首先安装所需要的sass-loader和node-sass"><a href="#首先安装所需要的sass-loader和node-sass" class="headerlink" title="首先安装所需要的sass-loader和node-sass"></a>首先安装所需要的sass-loader和node-sass</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br></pre></td></tr></table></figure></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2018/06/11/RESTful/">
                             <h3 class="media-heading">RESTful API</h3>
                         </a>
@@ -761,6 +717,31 @@
                         </span>
                         <div class="media-content hide-xs font-merryweather"><h2 id="Object-defineProperty"><a href="#Object-defineProperty" class="headerlink" title="Object.defineProperty()"></a>Object.defineProperty()</h2><blockquote>
 <p>The static method Object.defineProperty() defines a new property directly on an object, or modifies an existing property on an object, and returns the object.   – MDN<br>通过Object.defineProperty()可以在一个对象上定义新的属性或者修改存在的属性，并最终返回该对象。<br></p></blockquote></div>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <hr>
+                </div>
+                
+                <div class="media">
+                    
+                    <div class="media-left">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <img class="media-image" src="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" width="90" height="90">
+                        </a>
+                    </div>
+                    
+                    <div class="media-body">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <h3 class="media-heading">webhook配合node.js实现简单的自动化部署</h3>
+                        </a>
+                        <span class="media-meta">
+                            <span class="media-date text-small">
+                                
+                                    2019年4月11日
+                                
+                            </span>
+                        </span>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>

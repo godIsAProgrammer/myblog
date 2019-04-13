@@ -6,28 +6,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Caoqisen&#39;s Blog">
-    <title>CSS中一个冒号和两个冒号有什么区别 - Caoqisen&#39;s Blog</title>
+    <title>webhook配合node.js实现简单的自动化部署 - Caoqisen&#39;s Blog</title>
     <meta name="author" content="Cao qisen">
     
-        <meta name="keywords" content="JavaScript,react,">
+        <meta name="keywords" content="JavaScript,react,webhook,github,node.js">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"首先，阅读 w3c 对两者的定义：\nCSS 伪类用于向某些选择器添加特殊的效果。\n\nCSS 伪元素用于将特殊的效果添加到某些选择器。\n可以明确两点，第一两者都与选择器相关，第二就是添加一些“特殊”的效果。这里特殊指的是两者描述了其他 css 无法描述的东西。\n伪类可以独立于文档的元素来分配样式，且可以分配给任何元素，逻辑上和功能上类类似，但是其是预定义的、不存在于文档树中且表达方式也不同，所以叫伪类。\n伪元素所控制的内容和一个元素控制的内容一样，但是伪元素不存在于文档树中，不是真正的元素，所以叫伪元素。\n伪类有：\n:first-child ，:link:，vistited，:hover:，active:focus，:lang，:not(s)，：root等...\n伪元素有：\n:first-line，:first-letter，:before，:after，:placeholder,:selection\n提醒，如果你的网站只需要兼容webkit、firefox、opera等浏览器，建议对于伪元素采用双冒号的写法，如果不得不兼容IE浏览器，还是用CSS2的单冒号写法比较安全。如果自己不确定的话可以针对某些需要兼容的属性有两种属性。\n伪类和伪元素的区别：\n伪类伪类选择元素基于的是当前元素处于的状态，或者说元素当前所具有的特性，而不是元素的id、class、属性等静态的标志。由于状态是动态变化的，所以一个元素达到一个特定状态时，它可能得到一个伪类的样式；当状态改变时，它又会失去这个样式。由此可以看出，它的功能和class有些类似，但它是基于文档之外的抽象，所以叫伪类。\nE:link\n伪类将应用于未被访问过的链接，与:visited互斥。\nE:hover\n伪类将应用于有鼠标指针悬停于其上的元素。\nE:active\n伪类将应用于被激活的元素，如被点击的链接、被按下的按钮等。\nE:visited\n伪类将应用于已经被访问过的链接，与:link互斥。\nE:focus\n伪类将应用于拥有键盘输入焦点的元素。\nE:first-child\n伪类将应用于元素在页面中第一次出现的时候。\nE:lang\n伪类将应用于元素带有指定lang的情况。\n\n\n//示例\n\np:lang(zh-cmn-Hans) {\n\n  color: #f00;\n\n}\n\np:lang(en) {\n\n  color: #090;\n\n}\n\n\n&lt;p lang=&quot;zh&quot;&gt;中国&lt;/p&gt;\n\n&lt;p lang=&quot;en&quot;&gt;english&lt;/p&gt;\nE:not(s)\n匹配不含有s选择符的元素E。\n\n\n//示例（给该列表中除最后一项外的所有列表项加一条底边线）\n\n.demo li:not(:last-child) {\n\n  border-bottom: 1px solid #ddd;\n\n}\nE:root\n匹配E元素在文档的根元素。\n\n\n//示例（非IE文本将为black，IE9及以上为purple，IE8为yellow，IE7为blue，IE6为red）\n\n.test {\n\n  color: black;\n\n  color: yellow\\0;\n\n  *color: blue;\n\n  _color: red;\n\n}\n\nhtml:root .test {\n\n  color: purple\\0;\n\n}\n伪元素与伪类针对特殊状态的元素不同的是，伪元素是对元素中的特定内容进行操作，它所操作的层次比伪类更深了一层，也因此它的动态性比伪类要低得多。实际上，设计伪元素的目的就是去选取诸如元素内容第一个字（母）、第一行，选取某些内容前面或后面这种普通的选择器无法完成的工作。它控制的内容实际上和元素是相同的，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。\nE::first-letter\n伪元素的样式将应用于元素文本的第一个字（母）。\nE::first-line\n伪元素的样式将应用于元素文本的第一行。\nE::before\n在元素内容的最前面添加新内容。\nE::after\n在元素内容的最后面添加新内容。\n\n\n// 清楚浮动示例\n\n.clearfix::before, .clearfix::after {\n\n  content:&quot;&quot;;\n\n  display:table;\n\n}\n\n.clearfix::after {\n\n  clear:both;\n\n}\n\n.clearfix {\n\n  zoom:1; /* For IE 6/7 (trigger hasLayout) */\n\n}\nE::placeholder\n用于控制表单输入框占位符的外观，它允许开发者/设计师改变文字占位符的样式，默认的文字占位符为浅灰色。\n\n\n// 示例\n\ninput::-webkit-input-placeholder {\n\n  color: #999;\n\n}\n\ninput:-ms-input-placeholder { // IE10+\n\n  color: #999;\n\n}\n\ninput:-moz-placeholder { // Firefox4-18\n\n  color: #999;\n\n}\n\ninput::-moz-placeholder { // Firefox19+\n\n  color: #999;\n\n}\nE::selection\n定义元素被选择时的background-color，color及text-shadow(IE11尚不支持定义该属性)。\n\n\n//示例（将选中字体的颜色设置为#f00，背景颜色设置为#000）\n\np::-moz-selection{background:#000;color:#f00;}\n\np::selection{background:#000;color:#f00;}\n","dateCreated":"2017-02-24T22:53:00+08:00","dateModified":"2019-04-04T13:58:51+08:00","datePublished":"2017-02-24T22:53:00+08:00","description":"在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述： \n　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element. \n　　This :: notation is introduced by the current document in order to establish a discrimination between pseudo-classes and pseudo-elements. For compatibility with existing style sheets, user agents must also accept the previous one-colon notation for pseudo-elements introduced in CSS levels 1 and 2 (namely, :first-line, :first-letter, :before and :after). This compatibility is not allowed for the new pseudo-elements introduced in CSS level 3. \n　　简单翻译一下，大意就是，伪元素由双冒号和伪元素名称组成。双冒号是在当前规范中引入的，用于区分伪类和伪元素。但是伪类兼容现存样式，浏览器需要同时支持旧的伪类，比如:first-line、:first-letter、:before、:after等。那么问题来了，什么是伪类？什么是伪元素？","headline":"CSS中一个冒号和两个冒号有什么区别","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2017/02/24/css-1/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2017/02/24/css-1/","keywords":"CSS"}</script>
-    <meta name="description" content="在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述：  　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element.  　　This :: notation is introduced">
-<meta name="keywords" content="CSS">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 \n   \n了解完webhook之后，我们就开始利用webhook实现简单的自动化部署了。这里我们以GitHub的项目作为🌰\n1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; WebhooksPayload URL:  当你向GitHub push代码时，GitHub会向Payload URL里填写的URL发送POST请求，其中包含任何订阅事件的详细信息。你还可以指定要接收的数据格式（JSON，x-www-form-urlencoded等）。更多信息可以查看developer documentation。\n\n2、登录服务器3、安装github-webhook-handler依赖1npm i github-webhook-handler\n注意： 在Github Webhooks 设置里, Content type 必须为 application/json.\n4、创建处理webhook的脚本1234567891011121314151617181920212223242526272829303132333435363738394041// gitupdate.jsvar http = require('http')var createHandler = require('/usr/bin/node_modules/github-webhook-handler')var handler = createHandler(&#123; path: '/webhook', secret: 'xxx' &#125;)function run_cmd(cmd, args, callback) &#123;  var spawn = require('child_process').spawn;  var child = spawn(cmd, args);  var resp = \"\";  child.stdout.on('data', function(buffer) &#123; resp += buffer.toString(); &#125;);  child.stdout.on('end', function() &#123; callback (resp) &#125;);&#125;http.createServer(function (req, res) &#123;  handler(req, res, function (err) &#123;    res.statusCode = 404    res.end('no such location')  &#125;)&#125;).listen(7777)handler.on('error', function (err) &#123;  console.error('Error:', err.message)&#125;)handler.on('push', function (event) &#123;console.log(1111)  console.log('Received a push event for %s to %s',    event.payload.repository.name,    event.payload.ref)    run_cmd('sh', ['./deploy.sh',event.payload.repository.name], function(text)&#123; console.log(text) &#125;);&#125;)handler.on('issues', function (event) &#123;  console.log('Received an issue event for %s action=%s: #%d %s',    event.payload.repository.name,    event.payload.action,    event.payload.issue.number,    event.payload.issue.title)&#125;)\n注意： secret字段内容必须与在Github Webhooks设置里secret上所填的内容一致。\n5、创建处理git命令的脚本12345678910111213141516// deploy.shWEB_PATH='/root/tools/'$1WEB_USER='root'WEB_USERGROUP='root'echo \"Start deployment\"cd $WEB_PATHecho \"pulling source code...\"git reset --hard origin/mastergit clean -fgit pullgit checkout masterecho \"changing permissions...\"chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATHecho \"Finished.\"\n注意: 1、WEB_PATH是你的项目所在路径；2、$1为run_md方法里传进来的仓库名称；\n6、运行gitupdate.js1node gitupdate.js\n注意: 要想进程在后台运行，可安装pm2守护进程。\n","dateCreated":"2019-04-11T08:00:00+08:00","dateModified":"2019-04-13T11:32:39+08:00","datePublished":"2019-04-11T08:00:00+08:00","description":"什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 ","headline":"webhook配合node.js实现简单的自动化部署","image":["http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg","http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2019/04/11/webhook/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2019/04/11/webhook/","keywords":"webhook, github, node.js","thumbnailUrl":"http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"}</script>
+    <meta name="description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
+<meta name="keywords" content="webhook,github,node.js">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="CSS中一个冒号和两个冒号有什么区别">
-<meta property="og:url" content="http://blog.caoqs.com/2017/02/24/css-1/index.html">
+<meta property="og:title" content="webhook配合node.js实现简单的自动化部署">
+<meta property="og:url" content="http://blog.caoqs.com/2019/04/11/webhook/index.html">
 <meta property="og:site_name" content="Caoqisen&#39;s Blog">
-<meta property="og:description" content="在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述：  　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element.  　　This :: notation is introduced">
+<meta property="og:description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-04T05:58:51.338Z">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/webhook-1.png">
+<meta property="og:updated_time" content="2019-04-13T03:32:39.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CSS中一个冒号和两个冒号有什么区别">
-<meta name="twitter:description" content="在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述：  　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element.  　　This :: notation is introduced">
+<meta name="twitter:title" content="webhook配合node.js实现简单的自动化部署">
+<meta name="twitter:description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
+<meta name="twitter:image" content="http://blog.caoqs.com/assets/images/webhook-1.png">
 <meta name="twitter:creator" content="@PiNuoC">
     
     
@@ -37,6 +39,12 @@
         <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
+        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" />
+    
+    
+        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg" />
     
     
     <!--STYLES-->
@@ -184,189 +192,62 @@
 </nav>
 
             
+        <div class="post-header-cover
+                    text-center
+                    " style="background-image:url('http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            webhook配合node.js实现简单的自动化部署
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-04-11T08:00:00+08:00">
+	
+		    4月 11, 2019
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/webhook/">webhook</a>, <a class="category-link" href="/categories/webhook/nodejs/">nodejs</a>, <a class="category-link" href="/categories/webhook/nodejs/github/">github</a>
+
+
+    
+</div>
+
+    
+</div>
+
+            
+        </div>
+
             <div id="main" data-behavior="4"
-                 class="
+                 class="hasCover
                         hasCoverMetaIn
                         ">
                 
 <article class="post">
     
     
-        <div class="post-header main-content-wrap text-left">
-    
-        <h1 class="post-title">
-            CSS中一个冒号和两个冒号有什么区别
-        </h1>
-    
-    
-        <div class="post-meta">
-    <time datetime="2017-02-24T22:53:00+08:00">
-	
-		    2月 24, 2017
-    	
-    </time>
-    
-</div>
-
-    
-</div>
-
-    
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <!-- excerpt --><br>首先，阅读 w3c 对两者的定义：<p></p>
-<pre><code>CSS 伪类用于向某些选择器添加特殊的效果。
+            <h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p>
+   <a id="more"></a>
+<p>了解完webhook之后，我们就开始利用webhook实现简单的自动化部署了。<br>这里我们以GitHub的项目作为🌰</p>
+<h4 id="1、登录GitHub-gt-进入项目-gt-Settings-项目设置-gt-Webhooks"><a href="#1、登录GitHub-gt-进入项目-gt-Settings-项目设置-gt-Webhooks" class="headerlink" title="1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; Webhooks"></a>1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; Webhooks</h4><p><strong>Payload URL:</strong><br>  当你向GitHub push代码时，GitHub会向Payload URL里填写的URL发送POST请求，其中包含任何订阅事件的详细信息。你还可以指定要接收的数据格式（JSON，x-www-form-urlencoded等）。更多信息可以查看<a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">developer documentation</a>。</p>
+<p><img src="/assets/images/webhook-1.png" alt="github webhook settings"></p>
+<h4 id="2、登录服务器"><a href="#2、登录服务器" class="headerlink" title="2、登录服务器"></a>2、登录服务器</h4><h4 id="3、安装github-webhook-handler依赖"><a href="#3、安装github-webhook-handler依赖" class="headerlink" title="3、安装github-webhook-handler依赖"></a>3、安装<a href="https://www.npmjs.com/package/github-webhook-handler" target="_blank" rel="noopener">github-webhook-handler</a>依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i github-webhook-handler</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 在Github Webhooks 设置里, Content type 必须为 application/json.</p>
+<h4 id="4、创建处理webhook的脚本"><a href="#4、创建处理webhook的脚本" class="headerlink" title="4、创建处理webhook的脚本"></a>4、创建处理webhook的脚本</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gitupdate.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'/usr/bin/node_modules/github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/webhook'</span>, <span class="attr">secret</span>: <span class="string">'xxx'</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">7777</span>)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1111</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy.sh'</span>,event.payload.repository.name], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'issues'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received an issue event for %s action=%s: #%d %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> secret字段内容必须与在Github Webhooks设置里secret上所填的内容一致。</p>
+<h4 id="5、创建处理git命令的脚本"><a href="#5、创建处理git命令的脚本" class="headerlink" title="5、创建处理git命令的脚本"></a>5、创建处理git命令的脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// deploy.sh</span><br><span class="line"></span><br><span class="line">WEB_PATH=<span class="string">'/root/tools/'</span><span class="variable">$1</span></span><br><span class="line">WEB_USER=<span class="string">'root'</span></span><br><span class="line">WEB_USERGROUP=<span class="string">'root'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Start deployment"</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$WEB_PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pulling source code..."</span></span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"changing permissions..."</span></span><br><span class="line">chown -R <span class="variable">$WEB_USER</span>:<span class="variable">$WEB_USERGROUP</span> <span class="variable">$WEB_PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Finished."</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong> 1、WEB_PATH是你的项目所在路径；2、$1为run_md方法里传进来的仓库名称；</p>
+<h4 id="6、运行gitupdate-js"><a href="#6、运行gitupdate-js" class="headerlink" title="6、运行gitupdate.js"></a>6、运行gitupdate.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node gitupdate.js</span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong> 要想进程在后台运行，可安装<a href="https://www.npmjs.com/package/pm2" target="_blank" rel="noopener">pm2</a>守护进程。</p>
 
-CSS 伪元素用于将特殊的效果添加到某些选择器。
-</code></pre><p>可以明确两点，第一两者都与选择器相关，第二就是添加一些“特殊”的效果。这里特殊指的是两者描述了其他 css 无法描述的东西。</p>
-<p>伪类可以独立于文档的元素来分配样式，且可以分配给任何元素，逻辑上和功能上类类似，但是其是预定义的、不存在于文档树中且表达方式也不同，所以叫伪类。</p>
-<p>伪元素所控制的内容和一个元素控制的内容一样，但是伪元素不存在于文档树中，不是真正的元素，所以叫伪元素。</p>
-<p>伪类有：</p>
-<pre><code>:first-child ，:link:，vistited，:hover:，active:focus，:lang，:not(s)，：root等...
-</code></pre><p>伪元素有：</p>
-<pre><code>:first-line，:first-letter，:before，:after，:placeholder,:selection
-</code></pre><p>提醒，如果你的网站只需要兼容webkit、firefox、opera等浏览器，建议对于伪元素采用双冒号的写法，如果不得不兼容IE浏览器，还是用CSS2的单冒号写法比较安全。如果自己不确定的话可以针对某些需要兼容的属性有两种属性。</p>
-<p>伪类和伪元素的区别：</p>
-<p>伪类<br>伪类选择元素基于的是当前元素处于的状态，或者说元素当前所具有的特性，而不是元素的id、class、属性等静态的标志。由于状态是动态变化的，所以一个元素达到一个特定状态时，它可能得到一个伪类的样式；当状态改变时，它又会失去这个样式。由此可以看出，它的功能和class有些类似，但它是基于文档之外的抽象，所以叫伪类。</p>
-<p>E:link</p>
-<pre><code>伪类将应用于未被访问过的链接，与:visited互斥。
-</code></pre><p>E:hover</p>
-<pre><code>伪类将应用于有鼠标指针悬停于其上的元素。
-</code></pre><p>E:active</p>
-<pre><code>伪类将应用于被激活的元素，如被点击的链接、被按下的按钮等。
-</code></pre><p>E:visited</p>
-<pre><code>伪类将应用于已经被访问过的链接，与:link互斥。
-</code></pre><p>E:focus</p>
-<pre><code>伪类将应用于拥有键盘输入焦点的元素。
-</code></pre><p>E:first-child</p>
-<pre><code>伪类将应用于元素在页面中第一次出现的时候。
-</code></pre><p>E:lang</p>
-<pre><code>伪类将应用于元素带有指定lang的情况。
-
-
-//示例
-
-p:lang(zh-cmn-Hans) {
-
-  color: #f00;
-
-}
-
-p:lang(en) {
-
-  color: #090;
-
-}
-
-
-&lt;p lang=&quot;zh&quot;&gt;中国&lt;/p&gt;
-
-&lt;p lang=&quot;en&quot;&gt;english&lt;/p&gt;
-</code></pre><p>E:not(s)</p>
-<pre><code>匹配不含有s选择符的元素E。
-
-
-//示例（给该列表中除最后一项外的所有列表项加一条底边线）
-
-.demo li:not(:last-child) {
-
-  border-bottom: 1px solid #ddd;
-
-}
-</code></pre><p>E:root</p>
-<pre><code>匹配E元素在文档的根元素。
-
-
-//示例（非IE文本将为black，IE9及以上为purple，IE8为yellow，IE7为blue，IE6为red）
-
-.test {
-
-  color: black;
-
-  color: yellow\0;
-
-  *color: blue;
-
-  _color: red;
-
-}
-
-html:root .test {
-
-  color: purple\0;
-
-}
-</code></pre><p>伪元素<br>与伪类针对特殊状态的元素不同的是，伪元素是对元素中的特定内容进行操作，它所操作的层次比伪类更深了一层，也因此它的动态性比伪类要低得多。实际上，设计伪元素的目的就是去选取诸如元素内容第一个字（母）、第一行，选取某些内容前面或后面这种普通的选择器无法完成的工作。它控制的内容实际上和元素是相同的，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。</p>
-<p>E::first-letter</p>
-<pre><code>伪元素的样式将应用于元素文本的第一个字（母）。
-</code></pre><p>E::first-line</p>
-<pre><code>伪元素的样式将应用于元素文本的第一行。
-</code></pre><p>E::before</p>
-<pre><code>在元素内容的最前面添加新内容。
-</code></pre><p>E::after</p>
-<pre><code>在元素内容的最后面添加新内容。
-
-
-// 清楚浮动示例
-
-.clearfix::before, .clearfix::after {
-
-  content:&quot;&quot;;
-
-  display:table;
-
-}
-
-.clearfix::after {
-
-  clear:both;
-
-}
-
-.clearfix {
-
-  zoom:1; /* For IE 6/7 (trigger hasLayout) */
-
-}
-</code></pre><p>E::placeholder</p>
-<pre><code>用于控制表单输入框占位符的外观，它允许开发者/设计师改变文字占位符的样式，默认的文字占位符为浅灰色。
-
-
-// 示例
-
-input::-webkit-input-placeholder {
-
-  color: #999;
-
-}
-
-input:-ms-input-placeholder { // IE10+
-
-  color: #999;
-
-}
-
-input:-moz-placeholder { // Firefox4-18
-
-  color: #999;
-
-}
-
-input::-moz-placeholder { // Firefox19+
-
-  color: #999;
-
-}
-</code></pre><p>E::selection</p>
-<pre><code>定义元素被选择时的background-color，color及text-shadow(IE11尚不支持定义该属性)。
-
-
-//示例（将选中字体的颜色设置为#f00，背景颜色设置为#000）
-
-p::-moz-selection{background:#000;color:#f00;}
-
-p::selection{background:#000;color:#f00;}
-</code></pre>
             
 
         </div>
@@ -376,7 +257,7 @@ p::selection{background:#000;color:#f00;}
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/CSS/">CSS</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/github/">github</a> <a class="tag tag--primary tag--small t-link" href="/tags/node-js/">node.js</a> <a class="tag tag--primary tag--small t-link" href="/tags/webhook/">webhook</a>
 
             </div>
         
@@ -386,8 +267,7 @@ p::selection{background:#000;color:#f00;}
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/04/css-2/" data-tooltip="chrome input autofill 自动填充背景色问题" aria-label="上一篇: chrome input autofill 自动填充背景色问题">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -396,7 +276,7 @@ p::selection{background:#000;color:#f00;}
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/html5-1/" data-tooltip="HTML5.1 响应式图像" aria-label="下一篇: HTML5.1 响应式图像">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/14/defineProperty/" data-tooltip="Object.defineProperty()" aria-label="下一篇: Object.defineProperty()">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -414,7 +294,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -422,7 +302,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -430,7 +310,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -482,8 +362,7 @@ p::selection{background:#000;color:#f00;}
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/04/css-2/" data-tooltip="chrome input autofill 自动填充背景色问题" aria-label="上一篇: chrome input autofill 自动填充背景色问题">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
@@ -492,7 +371,7 @@ p::selection{background:#000;color:#f00;}
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/02/19/html5-1/" data-tooltip="HTML5.1 响应式图像" aria-label="下一篇: HTML5.1 响应式图像">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/06/14/defineProperty/" data-tooltip="Object.defineProperty()" aria-label="下一篇: Object.defineProperty()">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -510,7 +389,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -518,7 +397,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -526,7 +405,7 @@ p::selection{background:#000;color:#f00;}
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2017/02/24/css-1/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -560,7 +439,7 @@ p::selection{background:#000;color:#f00;}
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2017/02/24/css-1/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
                     </a>
                 </li>
@@ -568,7 +447,7 @@ p::selection{background:#000;color:#f00;}
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2017/02/24/css-1/">
+                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
                     </a>
                 </li>
@@ -576,7 +455,7 @@ p::selection{background:#000;color:#f00;}
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2017/02/24/css-1/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
                     </a>
                 </li>
@@ -858,9 +737,9 @@ p::selection{background:#000;color:#f00;}
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://blog.caoqs.com/2017/02/24/css-1/';
+                 this.page.url = 'http://blog.caoqs.com/2019/04/11/webhook/';
                  
-                    this.page.identifier = '2017/02/24/css-1/';
+                    this.page.identifier = '2019/04/11/webhook/';
                  
              };
             (function() {
