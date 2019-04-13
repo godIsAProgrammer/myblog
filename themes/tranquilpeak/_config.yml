@@ -65,14 +65,14 @@ sidebar:
         #     title: global.stack_overflow
         #     url: http://stackoverflow.com/users
         #     icon: fab fa-stack-overflow
-        twitter:
-            title: global.twitter
-            url: https://twitter.com/PiNuoC/
-            icon: fab fa-twitter
-        facebook:
-            title: global.facebook
-            url: https://www.facebook.com/qiye.cao.5/
-            icon: fab fa-facebook
+        # twitter:
+        #     title: global.twitter
+        #     url: https://twitter.com/PiNuoC/
+        #     icon: fab fa-twitter
+        # facebook:
+        #     title: global.facebook
+        #     url: https://www.facebook.com/qiye.cao.5/
+        #     icon: fab fa-facebook
         # google_plus:
         #     title: global.google_plus
         #     url: https://plus.google.com/
@@ -81,10 +81,10 @@ sidebar:
         #     title: global.linkedin
         #     url: https://www.linkedin.com/profile/
         #     icon: fab fa-linkedin
-        mail:
-            title: global.mail
-            url: mailto
-            icon: fa fa-envelope
+        # mail:
+        #     title: global.mail
+        #     url: mailto
+        #     icon: fa fa-envelope
     rss:
         rss:
             title: global.rss
@@ -123,7 +123,7 @@ author:
     # or in `source/assets/images/` (production)
     # or you can use an external url
     # Overwritten by your gravatar image if `gravatar_email` is filled
-    picture: https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no
+    picture: avatar.jpeg
     # Your Twitter username without the @. E.g : `tranquilpeak`
     twitter: PiNuoC
     # Your personal google plus profile id, not your blog or business page id.

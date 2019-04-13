@@ -6,35 +6,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Caoqisen&#39;s Blog">
-    <title>Welcome to Tranquilpeak 1.7 - Caoqisen&#39;s Blog</title>
+    <title>webhook配合node.js实现简单的自动化部署 - Caoqisen&#39;s Blog</title>
     <meta name="author" content="Cao qisen">
     
-        <meta name="keywords" content="JavaScript,react,disqus,google,gravatar">
+        <meta name="keywords" content="JavaScript,react,webhook,github,node.js">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"},"articleBody":"\nQuick StartCreate a new post1$ hexo new \"My New Post\"\nMore info: Writing\nRun server1$ hexo server\nMore info: Server\nGenerate static files1$ hexo generate\nMore info: Generating\nDeploy to remote sites1$ hexo deploy\nMore info: Deployment","dateCreated":"2019-04-05T20:30:05+08:00","dateModified":"2019-04-04T15:33:51+08:00","datePublished":"2019-04-05T20:30:05+08:00","description":"Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.","headline":"Welcome to Tranquilpeak 1.7","image":["http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg","http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2019/04/05/hello-world/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"}},"url":"http://blog.caoqs.com/2019/04/05/hello-world/","keywords":"hexo theme, responsive, swiftype, gravatar, disqus, google analytics","thumbnailUrl":"http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"}</script>
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
-<meta name="keywords" content="disqus,google,gravatar">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 \n   \n了解完webhook之后，我们就开始利用webhook实现简单的自动化部署了。这里我们以GitHub的项目作为🌰\n1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; WebhooksPayload URL:  当你向GitHub push代码时，GitHub会向Payload URL里填写的URL发送POST请求，其中包含任何订阅事件的详细信息。你还可以指定要接收的数据格式（JSON，x-www-form-urlencoded等）。更多信息可以查看developer documentation。\n\n2、登录服务器3、安装github-webhook-handler依赖1npm i github-webhook-handler\n注意： 在Github Webhooks 设置里, Content type 必须为 application/json.\n4、创建处理webhook的脚本1234567891011121314151617181920212223242526272829303132333435363738394041// gitupdate.jsvar http = require('http')var createHandler = require('/usr/bin/node_modules/github-webhook-handler')var handler = createHandler(&#123; path: '/webhook', secret: 'xxx' &#125;)function run_cmd(cmd, args, callback) &#123;  var spawn = require('child_process').spawn;  var child = spawn(cmd, args);  var resp = \"\";  child.stdout.on('data', function(buffer) &#123; resp += buffer.toString(); &#125;);  child.stdout.on('end', function() &#123; callback (resp) &#125;);&#125;http.createServer(function (req, res) &#123;  handler(req, res, function (err) &#123;    res.statusCode = 404    res.end('no such location')  &#125;)&#125;).listen(7777)handler.on('error', function (err) &#123;  console.error('Error:', err.message)&#125;)handler.on('push', function (event) &#123;console.log(1111)  console.log('Received a push event for %s to %s',    event.payload.repository.name,    event.payload.ref)    run_cmd('sh', ['./deploy.sh',event.payload.repository.name], function(text)&#123; console.log(text) &#125;);&#125;)handler.on('issues', function (event) &#123;  console.log('Received an issue event for %s action=%s: #%d %s',    event.payload.repository.name,    event.payload.action,    event.payload.issue.number,    event.payload.issue.title)&#125;)\n注意： secret字段内容必须与在Github Webhooks设置里secret上所填的内容一致。\n5、创建处理git命令的脚本12345678910111213141516// deploy.shWEB_PATH='/root/tools/'$1WEB_USER='root'WEB_USERGROUP='root'echo \"Start deployment\"cd $WEB_PATHecho \"pulling source code...\"git reset --hard origin/mastergit clean -fgit pullgit checkout masterecho \"changing permissions...\"chown -R $WEB_USER:$WEB_USERGROUP $WEB_PATHecho \"Finished.\"\n注意: 1、WEB_PATH是你的项目所在路径；2、$1为run_md方法里传进来的仓库名称；\n6、运行gitupdate.js1node gitupdate.js\n注意: 要想进程在后台运行，可安装pm2守护进程。\n","dateCreated":"2019-04-11T08:00:00+08:00","dateModified":"2019-04-13T11:32:39+08:00","datePublished":"2019-04-11T08:00:00+08:00","description":"什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 ","headline":"webhook配合node.js实现简单的自动化部署","image":["http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg","http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2019/04/11/webhook/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2019/04/11/webhook/","keywords":"webhook, github, node.js","thumbnailUrl":"http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"}</script>
+    <meta name="description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
+<meta name="keywords" content="webhook,github,node.js">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Welcome to Tranquilpeak 1.7">
-<meta property="og:url" content="http://blog.caoqs.com/2019/04/05/hello-world/index.html">
+<meta property="og:title" content="webhook配合node.js实现简单的自动化部署">
+<meta property="og:url" content="http://blog.caoqs.com/2019/04/11/webhook/index.html">
 <meta property="og:site_name" content="Caoqisen&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta property="og:description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-04-04T07:33:51.110Z">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/webhook-1.png">
+<meta property="og:updated_time" content="2019-04-13T03:32:39.113Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Welcome to Tranquilpeak 1.7">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.">
+<meta name="twitter:title" content="webhook配合node.js实现简单的自动化部署">
+<meta name="twitter:description" content="什么是webhook？  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。">
+<meta name="twitter:image" content="http://blog.caoqs.com/assets/images/webhook-1.png">
 <meta name="twitter:creator" content="@PiNuoC">
     
     
         
     
     
-        <meta property="og:image" content="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"/>
+        <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
         <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg"/>
@@ -74,7 +76,7 @@
             <a class="header-right-picture " href="#about">
         
         
-            <img class="header-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img class="header-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
         </a>
     
@@ -92,11 +94,11 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
                 </a>
                 <h4 class="sidebar-profile-name">Cao qisen</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>程序猿</p>
+                    <h5 class="sidebar-profile-bio"><p>Web front-end development engineer.</p>
 </h5>
                 
             </div>
@@ -171,33 +173,6 @@
                     </a>
             </li>
             
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/PiNuoC/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.facebook.com/qiye.cao.5/" target="_blank" rel="noopener" title="Facebook">
-                    
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="邮箱">
-                    
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">邮箱</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
@@ -224,20 +199,20 @@
                 <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title">
-            Welcome to Tranquilpeak 1.7
+            webhook配合node.js实现简单的自动化部署
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-04-05T20:30:05+08:00">
+    <time datetime="2019-04-11T08:00:00+08:00">
 	
-		    4月 05, 2019
+		    4月 11, 2019
     	
     </time>
     
         <span>发布在 </span>
         
-    <a class="category-link" href="/categories/tranquilpeak/">tranquilpeak</a>, <a class="category-link" href="/categories/tranquilpeak/releases/">releases</a>
+    <a class="category-link" href="/categories/webhook/">webhook</a>, <a class="category-link" href="/categories/webhook/nodejs/">nodejs</a>, <a class="category-link" href="/categories/webhook/nodejs/github/">github</a>
 
 
     
@@ -259,15 +234,20 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <!-- excerpt --><p></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+            <h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p>
+   <a id="more"></a>
+<p>了解完webhook之后，我们就开始利用webhook实现简单的自动化部署了。<br>这里我们以GitHub的项目作为🌰</p>
+<h4 id="1、登录GitHub-gt-进入项目-gt-Settings-项目设置-gt-Webhooks"><a href="#1、登录GitHub-gt-进入项目-gt-Settings-项目设置-gt-Webhooks" class="headerlink" title="1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; Webhooks"></a>1、登录GitHub -&gt; 进入项目 -&gt; Settings (项目设置) -&gt; Webhooks</h4><p><strong>Payload URL:</strong><br>  当你向GitHub push代码时，GitHub会向Payload URL里填写的URL发送POST请求，其中包含任何订阅事件的详细信息。你还可以指定要接收的数据格式（JSON，x-www-form-urlencoded等）。更多信息可以查看<a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">developer documentation</a>。</p>
+<p><img src="/assets/images/webhook-1.png" alt="github webhook settings"></p>
+<h4 id="2、登录服务器"><a href="#2、登录服务器" class="headerlink" title="2、登录服务器"></a>2、登录服务器</h4><h4 id="3、安装github-webhook-handler依赖"><a href="#3、安装github-webhook-handler依赖" class="headerlink" title="3、安装github-webhook-handler依赖"></a>3、安装<a href="https://www.npmjs.com/package/github-webhook-handler" target="_blank" rel="noopener">github-webhook-handler</a>依赖</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i github-webhook-handler</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> 在Github Webhooks 设置里, Content type 必须为 application/json.</p>
+<h4 id="4、创建处理webhook的脚本"><a href="#4、创建处理webhook的脚本" class="headerlink" title="4、创建处理webhook的脚本"></a>4、创建处理webhook的脚本</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// gitupdate.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'/usr/bin/node_modules/github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/webhook'</span>, <span class="attr">secret</span>: <span class="string">'xxx'</span> &#125;)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">7777</span>)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1111</span>)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref)</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy.sh'</span>,event.payload.repository.name], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">handler.on(<span class="string">'issues'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received an issue event for %s action=%s: #%d %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.action,</span><br><span class="line">    event.payload.issue.number,</span><br><span class="line">    event.payload.issue.title)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>注意：</strong> secret字段内容必须与在Github Webhooks设置里secret上所填的内容一致。</p>
+<h4 id="5、创建处理git命令的脚本"><a href="#5、创建处理git命令的脚本" class="headerlink" title="5、创建处理git命令的脚本"></a>5、创建处理git命令的脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">// deploy.sh</span><br><span class="line"></span><br><span class="line">WEB_PATH=<span class="string">'/root/tools/'</span><span class="variable">$1</span></span><br><span class="line">WEB_USER=<span class="string">'root'</span></span><br><span class="line">WEB_USERGROUP=<span class="string">'root'</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Start deployment"</span></span><br><span class="line"><span class="built_in">cd</span> <span class="variable">$WEB_PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"pulling source code..."</span></span><br><span class="line">git reset --hard origin/master</span><br><span class="line">git clean -f</span><br><span class="line">git pull</span><br><span class="line">git checkout master</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"changing permissions..."</span></span><br><span class="line">chown -R <span class="variable">$WEB_USER</span>:<span class="variable">$WEB_USERGROUP</span> <span class="variable">$WEB_PATH</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Finished."</span></span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong> 1、WEB_PATH是你的项目所在路径；2、$1为run_md方法里传进来的仓库名称；</p>
+<h4 id="6、运行gitupdate-js"><a href="#6、运行gitupdate-js" class="headerlink" title="6、运行gitupdate.js"></a>6、运行gitupdate.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node gitupdate.js</span><br></pre></td></tr></table></figure>
+<p><strong>注意:</strong> 要想进程在后台运行，可安装<a href="https://www.npmjs.com/package/pm2" target="_blank" rel="noopener">pm2</a>守护进程。</p>
+
             
 
         </div>
@@ -277,7 +257,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">标签</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/disqus/">disqus</a> <a class="tag tag--primary tag--small t-link" href="/tags/google-analytics/">google analytics</a> <a class="tag tag--primary tag--small t-link" href="/tags/gravatar/">gravatar</a> <a class="tag tag--primary tag--small t-link" href="/tags/hexo-theme/">hexo theme</a> <a class="tag tag--primary tag--small t-link" href="/tags/responsive/">responsive</a> <a class="tag tag--primary tag--small t-link" href="/tags/swiftype/">swiftype</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/github/">github</a> <a class="tag tag--primary tag--small t-link" href="/tags/node-js/">node.js</a> <a class="tag tag--primary tag--small t-link" href="/tags/webhook/">webhook</a>
 
             </div>
         
@@ -314,7 +294,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -322,7 +302,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -330,7 +310,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -409,7 +389,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -417,7 +397,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -425,7 +405,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/05/hello-world/" title="分享到 Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/" title="分享到 Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -459,7 +439,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/05/hello-world/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
                     </a>
                 </li>
@@ -467,7 +447,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/05/hello-world/">
+                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
                     </a>
                 </li>
@@ -475,7 +455,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/05/hello-world/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/11/webhook/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
                     </a>
                 </li>
@@ -499,18 +479,18 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img id="about-card-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
             <h4 id="about-card-name">Cao qisen</h4>
         
-            <div id="about-card-bio"><p>程序猿</p>
+            <div id="about-card-bio"><p>Web front-end development engineer.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>前端开发工程师</p>
+                <p>Web developer</p>
 
             </div>
         
@@ -628,7 +608,7 @@
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/11/html5-3/">
-                            <h3 class="media-heading">(译）理解浏览器的关键渲染路径</h3>
+                            <h3 class="media-heading">理解浏览器的关键渲染路径</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -666,25 +646,6 @@
                             </span>
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p> 最近工作上有遇到绘制环形进度条的需求，绘制环形进度条可以由传统的css3和canvas实现，这边介绍的是canvas的实现方式。<br></p></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/19/wepack-1/">
-                            <h3 class="media-heading">webpack2配置sass</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月19日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><h4 id="首先安装所需要的sass-loader和node-sass"><a href="#首先安装所需要的sass-loader和node-sass" class="headerlink" title="首先安装所需要的sass-loader和node-sass"></a>首先安装所需要的sass-loader和node-sass</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br></pre></td></tr></table></figure></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -734,23 +695,23 @@
                 <div class="media">
                     
                     <div class="media-left">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
                             <img class="media-image" src="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" width="90" height="90">
                         </a>
                     </div>
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
-                            <h3 class="media-heading">Welcome to Tranquilpeak 1.7</h3>
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <h3 class="media-heading">webhook配合node.js实现简单的自动化部署</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2019年4月5日
+                                    2019年4月11日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br></p></div>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -760,7 +721,7 @@
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="没有找到文章" data-message-one="找到 1 篇文章" data-message-other="找到 {n} 篇文章">
-                找到 10 篇文章
+                找到 9 篇文章
             </p>
         </div>
     </div>
@@ -776,9 +737,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://blog.caoqs.com/2019/04/05/hello-world/';
+                 this.page.url = 'http://blog.caoqs.com/2019/04/11/webhook/';
                  
-                    this.page.identifier = '2019/04/05/hello-world/';
+                    this.page.identifier = '2019/04/11/webhook/';
                  
              };
             (function() {

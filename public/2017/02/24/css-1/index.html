@@ -15,7 +15,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"},"articleBody":"首先，阅读 w3c 对两者的定义：\nCSS 伪类用于向某些选择器添加特殊的效果。\n\nCSS 伪元素用于将特殊的效果添加到某些选择器。\n可以明确两点，第一两者都与选择器相关，第二就是添加一些“特殊”的效果。这里特殊指的是两者描述了其他 css 无法描述的东西。\n伪类可以独立于文档的元素来分配样式，且可以分配给任何元素，逻辑上和功能上类类似，但是其是预定义的、不存在于文档树中且表达方式也不同，所以叫伪类。\n伪元素所控制的内容和一个元素控制的内容一样，但是伪元素不存在于文档树中，不是真正的元素，所以叫伪元素。\n伪类有：\n:first-child ，:link:，vistited，:hover:，active:focus，:lang，:not(s)，：root等...\n伪元素有：\n:first-line，:first-letter，:before，:after，:placeholder,:selection\n提醒，如果你的网站只需要兼容webkit、firefox、opera等浏览器，建议对于伪元素采用双冒号的写法，如果不得不兼容IE浏览器，还是用CSS2的单冒号写法比较安全。如果自己不确定的话可以针对某些需要兼容的属性有两种属性。\n伪类和伪元素的区别：\n伪类伪类选择元素基于的是当前元素处于的状态，或者说元素当前所具有的特性，而不是元素的id、class、属性等静态的标志。由于状态是动态变化的，所以一个元素达到一个特定状态时，它可能得到一个伪类的样式；当状态改变时，它又会失去这个样式。由此可以看出，它的功能和class有些类似，但它是基于文档之外的抽象，所以叫伪类。\nE:link\n伪类将应用于未被访问过的链接，与:visited互斥。\nE:hover\n伪类将应用于有鼠标指针悬停于其上的元素。\nE:active\n伪类将应用于被激活的元素，如被点击的链接、被按下的按钮等。\nE:visited\n伪类将应用于已经被访问过的链接，与:link互斥。\nE:focus\n伪类将应用于拥有键盘输入焦点的元素。\nE:first-child\n伪类将应用于元素在页面中第一次出现的时候。\nE:lang\n伪类将应用于元素带有指定lang的情况。\n\n\n//示例\n\np:lang(zh-cmn-Hans) {\n\n  color: #f00;\n\n}\n\np:lang(en) {\n\n  color: #090;\n\n}\n\n\n&lt;p lang=&quot;zh&quot;&gt;中国&lt;/p&gt;\n\n&lt;p lang=&quot;en&quot;&gt;english&lt;/p&gt;\nE:not(s)\n匹配不含有s选择符的元素E。\n\n\n//示例（给该列表中除最后一项外的所有列表项加一条底边线）\n\n.demo li:not(:last-child) {\n\n  border-bottom: 1px solid #ddd;\n\n}\nE:root\n匹配E元素在文档的根元素。\n\n\n//示例（非IE文本将为black，IE9及以上为purple，IE8为yellow，IE7为blue，IE6为red）\n\n.test {\n\n  color: black;\n\n  color: yellow\\0;\n\n  *color: blue;\n\n  _color: red;\n\n}\n\nhtml:root .test {\n\n  color: purple\\0;\n\n}\n伪元素与伪类针对特殊状态的元素不同的是，伪元素是对元素中的特定内容进行操作，它所操作的层次比伪类更深了一层，也因此它的动态性比伪类要低得多。实际上，设计伪元素的目的就是去选取诸如元素内容第一个字（母）、第一行，选取某些内容前面或后面这种普通的选择器无法完成的工作。它控制的内容实际上和元素是相同的，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。\nE::first-letter\n伪元素的样式将应用于元素文本的第一个字（母）。\nE::first-line\n伪元素的样式将应用于元素文本的第一行。\nE::before\n在元素内容的最前面添加新内容。\nE::after\n在元素内容的最后面添加新内容。\n\n\n// 清楚浮动示例\n\n.clearfix::before, .clearfix::after {\n\n  content:&quot;&quot;;\n\n  display:table;\n\n}\n\n.clearfix::after {\n\n  clear:both;\n\n}\n\n.clearfix {\n\n  zoom:1; /* For IE 6/7 (trigger hasLayout) */\n\n}\nE::placeholder\n用于控制表单输入框占位符的外观，它允许开发者/设计师改变文字占位符的样式，默认的文字占位符为浅灰色。\n\n\n// 示例\n\ninput::-webkit-input-placeholder {\n\n  color: #999;\n\n}\n\ninput:-ms-input-placeholder { // IE10+\n\n  color: #999;\n\n}\n\ninput:-moz-placeholder { // Firefox4-18\n\n  color: #999;\n\n}\n\ninput::-moz-placeholder { // Firefox19+\n\n  color: #999;\n\n}\nE::selection\n定义元素被选择时的background-color，color及text-shadow(IE11尚不支持定义该属性)。\n\n\n//示例（将选中字体的颜色设置为#f00，背景颜色设置为#000）\n\np::-moz-selection{background:#000;color:#f00;}\n\np::selection{background:#000;color:#f00;}\n","dateCreated":"2017-02-24T22:53:00+08:00","dateModified":"2019-04-04T13:58:51+08:00","datePublished":"2017-02-24T22:53:00+08:00","description":"在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述： \n　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element. \n　　This :: notation is introduced by the current document in order to establish a discrimination between pseudo-classes and pseudo-elements. For compatibility with existing style sheets, user agents must also accept the previous one-colon notation for pseudo-elements introduced in CSS levels 1 and 2 (namely, :first-line, :first-letter, :before and :after). This compatibility is not allowed for the new pseudo-elements introduced in CSS level 3. \n　　简单翻译一下，大意就是，伪元素由双冒号和伪元素名称组成。双冒号是在当前规范中引入的，用于区分伪类和伪元素。但是伪类兼容现存样式，浏览器需要同时支持旧的伪类，比如:first-line、:first-letter、:before、:after等。那么问题来了，什么是伪类？什么是伪元素？","headline":"CSS中一个冒号和两个冒号有什么区别","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2017/02/24/css-1/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"}},"url":"http://blog.caoqs.com/2017/02/24/css-1/","keywords":"CSS"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"首先，阅读 w3c 对两者的定义：\nCSS 伪类用于向某些选择器添加特殊的效果。\n\nCSS 伪元素用于将特殊的效果添加到某些选择器。\n可以明确两点，第一两者都与选择器相关，第二就是添加一些“特殊”的效果。这里特殊指的是两者描述了其他 css 无法描述的东西。\n伪类可以独立于文档的元素来分配样式，且可以分配给任何元素，逻辑上和功能上类类似，但是其是预定义的、不存在于文档树中且表达方式也不同，所以叫伪类。\n伪元素所控制的内容和一个元素控制的内容一样，但是伪元素不存在于文档树中，不是真正的元素，所以叫伪元素。\n伪类有：\n:first-child ，:link:，vistited，:hover:，active:focus，:lang，:not(s)，：root等...\n伪元素有：\n:first-line，:first-letter，:before，:after，:placeholder,:selection\n提醒，如果你的网站只需要兼容webkit、firefox、opera等浏览器，建议对于伪元素采用双冒号的写法，如果不得不兼容IE浏览器，还是用CSS2的单冒号写法比较安全。如果自己不确定的话可以针对某些需要兼容的属性有两种属性。\n伪类和伪元素的区别：\n伪类伪类选择元素基于的是当前元素处于的状态，或者说元素当前所具有的特性，而不是元素的id、class、属性等静态的标志。由于状态是动态变化的，所以一个元素达到一个特定状态时，它可能得到一个伪类的样式；当状态改变时，它又会失去这个样式。由此可以看出，它的功能和class有些类似，但它是基于文档之外的抽象，所以叫伪类。\nE:link\n伪类将应用于未被访问过的链接，与:visited互斥。\nE:hover\n伪类将应用于有鼠标指针悬停于其上的元素。\nE:active\n伪类将应用于被激活的元素，如被点击的链接、被按下的按钮等。\nE:visited\n伪类将应用于已经被访问过的链接，与:link互斥。\nE:focus\n伪类将应用于拥有键盘输入焦点的元素。\nE:first-child\n伪类将应用于元素在页面中第一次出现的时候。\nE:lang\n伪类将应用于元素带有指定lang的情况。\n\n\n//示例\n\np:lang(zh-cmn-Hans) {\n\n  color: #f00;\n\n}\n\np:lang(en) {\n\n  color: #090;\n\n}\n\n\n&lt;p lang=&quot;zh&quot;&gt;中国&lt;/p&gt;\n\n&lt;p lang=&quot;en&quot;&gt;english&lt;/p&gt;\nE:not(s)\n匹配不含有s选择符的元素E。\n\n\n//示例（给该列表中除最后一项外的所有列表项加一条底边线）\n\n.demo li:not(:last-child) {\n\n  border-bottom: 1px solid #ddd;\n\n}\nE:root\n匹配E元素在文档的根元素。\n\n\n//示例（非IE文本将为black，IE9及以上为purple，IE8为yellow，IE7为blue，IE6为red）\n\n.test {\n\n  color: black;\n\n  color: yellow\\0;\n\n  *color: blue;\n\n  _color: red;\n\n}\n\nhtml:root .test {\n\n  color: purple\\0;\n\n}\n伪元素与伪类针对特殊状态的元素不同的是，伪元素是对元素中的特定内容进行操作，它所操作的层次比伪类更深了一层，也因此它的动态性比伪类要低得多。实际上，设计伪元素的目的就是去选取诸如元素内容第一个字（母）、第一行，选取某些内容前面或后面这种普通的选择器无法完成的工作。它控制的内容实际上和元素是相同的，但是它本身只是基于元素的抽象，并不存在于文档中，所以叫伪元素。\nE::first-letter\n伪元素的样式将应用于元素文本的第一个字（母）。\nE::first-line\n伪元素的样式将应用于元素文本的第一行。\nE::before\n在元素内容的最前面添加新内容。\nE::after\n在元素内容的最后面添加新内容。\n\n\n// 清楚浮动示例\n\n.clearfix::before, .clearfix::after {\n\n  content:&quot;&quot;;\n\n  display:table;\n\n}\n\n.clearfix::after {\n\n  clear:both;\n\n}\n\n.clearfix {\n\n  zoom:1; /* For IE 6/7 (trigger hasLayout) */\n\n}\nE::placeholder\n用于控制表单输入框占位符的外观，它允许开发者/设计师改变文字占位符的样式，默认的文字占位符为浅灰色。\n\n\n// 示例\n\ninput::-webkit-input-placeholder {\n\n  color: #999;\n\n}\n\ninput:-ms-input-placeholder { // IE10+\n\n  color: #999;\n\n}\n\ninput:-moz-placeholder { // Firefox4-18\n\n  color: #999;\n\n}\n\ninput::-moz-placeholder { // Firefox19+\n\n  color: #999;\n\n}\nE::selection\n定义元素被选择时的background-color，color及text-shadow(IE11尚不支持定义该属性)。\n\n\n//示例（将选中字体的颜色设置为#f00，背景颜色设置为#000）\n\np::-moz-selection{background:#000;color:#f00;}\n\np::selection{background:#000;color:#f00;}\n","dateCreated":"2017-02-24T22:53:00+08:00","dateModified":"2019-04-04T13:58:51+08:00","datePublished":"2017-02-24T22:53:00+08:00","description":"在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述： \n　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element. \n　　This :: notation is introduced by the current document in order to establish a discrimination between pseudo-classes and pseudo-elements. For compatibility with existing style sheets, user agents must also accept the previous one-colon notation for pseudo-elements introduced in CSS levels 1 and 2 (namely, :first-line, :first-letter, :before and :after). This compatibility is not allowed for the new pseudo-elements introduced in CSS level 3. \n　　简单翻译一下，大意就是，伪元素由双冒号和伪元素名称组成。双冒号是在当前规范中引入的，用于区分伪类和伪元素。但是伪类兼容现存样式，浏览器需要同时支持旧的伪类，比如:first-line、:first-letter、:before、:after等。那么问题来了，什么是伪类？什么是伪元素？","headline":"CSS中一个冒号和两个冒号有什么区别","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2017/02/24/css-1/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2017/02/24/css-1/","keywords":"CSS"}</script>
     <meta name="description" content="在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述：  　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element.  　　This :: notation is introduced">
 <meta name="keywords" content="CSS">
 <meta property="og:type" content="blog">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"/>
+        <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
     
@@ -68,7 +68,7 @@
             <a class="header-right-picture " href="#about">
         
         
-            <img class="header-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img class="header-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
         </a>
     
@@ -86,11 +86,11 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
                 </a>
                 <h4 class="sidebar-profile-name">Cao qisen</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>程序猿</p>
+                    <h5 class="sidebar-profile-bio"><p>Web front-end development engineer.</p>
 </h5>
                 
             </div>
@@ -162,33 +162,6 @@
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/PiNuoC/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.facebook.com/qiye.cao.5/" target="_blank" rel="noopener" title="Facebook">
-                    
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="邮箱">
-                    
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">邮箱</span>
                     </a>
             </li>
             
@@ -627,18 +600,18 @@ p::selection{background:#000;color:#f00;}
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img id="about-card-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
             <h4 id="about-card-name">Cao qisen</h4>
         
-            <div id="about-card-bio"><p>程序猿</p>
+            <div id="about-card-bio"><p>Web front-end development engineer.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>前端开发工程师</p>
+                <p>Web developer</p>
 
             </div>
         
@@ -756,7 +729,7 @@ p::selection{background:#000;color:#f00;}
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/11/html5-3/">
-                            <h3 class="media-heading">(译）理解浏览器的关键渲染路径</h3>
+                            <h3 class="media-heading">理解浏览器的关键渲染路径</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -794,25 +767,6 @@ p::selection{background:#000;color:#f00;}
                             </span>
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p> 最近工作上有遇到绘制环形进度条的需求，绘制环形进度条可以由传统的css3和canvas实现，这边介绍的是canvas的实现方式。<br></p></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/19/wepack-1/">
-                            <h3 class="media-heading">webpack2配置sass</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月19日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><h4 id="首先安装所需要的sass-loader和node-sass"><a href="#首先安装所需要的sass-loader和node-sass" class="headerlink" title="首先安装所需要的sass-loader和node-sass"></a>首先安装所需要的sass-loader和node-sass</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br></pre></td></tr></table></figure></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -862,23 +816,23 @@ p::selection{background:#000;color:#f00;}
                 <div class="media">
                     
                     <div class="media-left">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
                             <img class="media-image" src="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" width="90" height="90">
                         </a>
                     </div>
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
-                            <h3 class="media-heading">Welcome to Tranquilpeak 1.7</h3>
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <h3 class="media-heading">webhook配合node.js实现简单的自动化部署</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2019年4月5日
+                                    2019年4月11日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br></p></div>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -888,7 +842,7 @@ p::selection{background:#000;color:#f00;}
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="没有找到文章" data-message-one="找到 1 篇文章" data-message-other="找到 {n} 篇文章">
-                找到 10 篇文章
+                找到 9 篇文章
             </p>
         </div>
     </div>

@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Caoqisen&#39;s Blog">
-    <title>(译）理解浏览器的关键渲染路径 - Caoqisen&#39;s Blog</title>
+    <title>理解浏览器的关键渲染路径 - Caoqisen&#39;s Blog</title>
     <meta name="author" content="Cao qisen">
     
         <meta name="keywords" content="JavaScript,react,浏览器关键渲染">
@@ -15,11 +15,11 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"},"articleBody":"\n\n\n#1. 构造DOM树DOM（Document Object Model）树是一个表示全解析过的HTML页面的对象。从根节点元素&lt;html&gt;开始，会逐个创建页面中的每个元素/文本节点。元素包裹的其他元素会被作为子元素节点，并且每个节点会包含其全部的属性。例如：&lt;a&gt;标签会有href属性与其节点关联。举个🌰：123456789101112131415161718&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Understanding the Critical Rendering Path&lt;/title&gt;  &lt;link rel=\"stylesheet\" href=\"style.css\"&gt;&lt;/head&gt;  &lt;body&gt;    &lt;header&gt;      &lt;h1&gt;Understanding the Critical Rendering Path&lt;/h1&gt;  &lt;/header&gt;  &lt;main&gt;      &lt;h2&gt;Introduction&lt;/h2&gt;      &lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;  &lt;/main&gt;  &lt;footer&gt;      &lt;small&gt;Copyright 2017&lt;/small&gt;  &lt;/footer&gt;&lt;/body&gt;  &lt;/html&gt;\n上述HTML会被解析成如下的DOM树\nHTML很好的特点在于不需要全部加载完成页面所有内容才来显示网页，可以解析完成一部分内容呈现一部分。但是，其他资源比如CSS和JavaScript会阻止页面的渲染。\n#2. 构建CSSOM树CSSOM（CSS Object Model）是一个表示各个DOM相关样式的对象，它的表示方法与DOM相似，但是各个节点存在相关的样式值。不论其是显示、还是隐式声明这些样式。在style.css文件中，我们有如下样式：123456789body &#123; font-size: 18px; &#125;header &#123; color: plum; &#125;  h1 &#123; font-size: 28px; &#125;main &#123; color: firebrick; &#125;  h2 &#123; font-size: 20px; &#125;footer &#123; display: none; &#125;\n接着会创建如下的CSSOM树：\nCSS一直被认为是一种渲染阻塞资源。因此如果在首次加载时没有全部解析资源内容就无法进行渲染树的构建。与HTML不同，CSS具有层叠继承的特性，因此不能进行局部加载。定义在文档后面的样式属性会覆盖或更改写之前定义的同类属性。即，如果如果CSS可以进行局部加载的话会导致出现加载错样式的情况。因此表明，CSS必须全部解析之后才能进行下一步。\n如果CSS文件适用于当前设备的话，仅仅只是会阻塞渲染。&lt;link rel=&quot;stylesheet&quot;&gt;标签可以接受media属性来指定特定样式宽度的特定媒体查询。🌰：如果我们有一个样式表具有orientation:landscape的媒体属性，并且我们查看该页面使用portrait模式，就不会出现资源加载而产生的渲染阻塞情况。\nCSS要会导致脚本阻塞，这是由于JavaScript文件必须等待CSSOM构建结束之后才进行加载。\n#运行JavaScriptJavaScript被认为是解析阻塞资源，这表示当解析HTML文档自身时候会被JavaScript给阻塞掉。\n当解析器解析到&lt;script&gt;标签时，无论该资源是内部还是外链的都会停止解析，并且等到资源被下载并运行结束后才继续进行解析。这也是为什么如果我们有一个引用了JavaScript文件的元素，它必须被放在可视文档元素之外的原因。\n为避免JavaScript解析阻塞，它可以通过设定async属性来要求其异步加载。1&lt;script async src=\"script.js\"&gt;\n#4 创建渲染树(Render Tree)渲染树是DOM树和CSSOM树的结合体，它代表最终会渲染在页面上的元素的结构对象。它表示只会关注可见内容，对于被隐藏或者CSS属性display:none的属性，不会被包含在结构内。\n使用上面例子的DOM和CSSOM，渲染树被创建如下：\n#5. 生成布局布局决定了浏览器视窗大小，它提供了上下文依赖的CSS样式，如百分比或窗口的单位。视窗尺寸通常通过&lt;head&gt;标签中的&lt;meta&gt;中的viewport设定来决定。如果不存在该标签，则通常默认为980px。\n例如：最常用的meta viewport值是设定视窗大小与设备宽度对应：\n1&lt;meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"&gt;\n举个🌰，如果用户使用设备访问网页，宽度为1000px。然后整体视窗尺寸就会基于这个宽度值了，比如50%就是500px,10vw就是100px。\n#6. 绘制页面最后，在绘制页面步骤。页面上的所有可见内容都会被转换为像素并呈现在屏幕上。\n具体的绘制时间跟DOM数以及应用的样式有关。有些样式会话费更多的执行时间，比如复杂的渐变背景图片所需要的计算时间远超过简单固定背景色。\n#整合所有想要看到关键渲染路径的执行流程，可以使用Chrome的DevTools：12345678910111213141516171819&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Understanding the Critical Rendering Path&lt;/title&gt;  &lt;link rel=\"stylesheet\" href=\"style.css\"&gt;&lt;/head&gt;  &lt;body&gt;    &lt;header&gt;      &lt;h1&gt;Understanding the Critical Rendering Path&lt;/h1&gt;  &lt;/header&gt;  &lt;main&gt;      &lt;h2&gt;Introduction&lt;/h2&gt;      &lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;  &lt;/main&gt;  &lt;footer&gt;      &lt;small&gt;Copyright 2017&lt;/small&gt;  &lt;/footer&gt;  &lt;script src=\"main.js\"&gt;&lt;/script&gt;&lt;/body&gt;  &lt;/html&gt;\n可以看关于页面加载时的事件日志，以下是我们获得的：\n\n发送请求：发送GET请求index.html\n解析HTML然后发送请求：开始解析HTML并构建DOM，然后发送GET请求style.css和main.js。\n解析样式表：根据style.css生成CSSOM\n执行计算脚本：执行main.js\n布局：基于HTML的元视窗标签，生成布局\n绘制页面：绘制网页\n\n文章 by lx7575000原文链接：Understanding the Critical Rendering Path","dateCreated":"2017-03-11T22:09:40+08:00","dateModified":"2019-04-04T14:34:39+08:00","datePublished":"2017-03-11T22:09:40+08:00","description":"#(译）理解浏览器的关键渲染路径前些日子在面试的时候有被问及过， 当时的回答不是让面试官很满意，今天刚好在网上看到这篇博文，感觉解释的很好就转了。文章末尾有原文链接地址\n当浏览器接收到从服务器发送过来的HTML页面信息，在将其绘画渲染到屏幕上之前会有许多的步骤要做。浏览器绘制页面需要做的这一系列行为我们称为关键渲染路径。\n了解CRP的知识对于你理解如何提升网站渲染效率非常有用，CRP总共有六步：\n\n构建DOM树\n构建CSSOM树\n运行JavaScript\n创建渲染树\n生成布局\n绘制页面","headline":"(译）理解浏览器的关键渲染路径","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2017/03/11/html5-3/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"}},"url":"http://blog.caoqs.com/2017/03/11/html5-3/","keywords":"html, 浏览器加载, 前端杂文"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"\n\n\n#1. 构造DOM树DOM（Document Object Model）树是一个表示全解析过的HTML页面的对象。从根节点元素&lt;html&gt;开始，会逐个创建页面中的每个元素/文本节点。元素包裹的其他元素会被作为子元素节点，并且每个节点会包含其全部的属性。例如：&lt;a&gt;标签会有href属性与其节点关联。举个🌰：123456789101112131415161718&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Understanding the Critical Rendering Path&lt;/title&gt;  &lt;link rel=\"stylesheet\" href=\"style.css\"&gt;&lt;/head&gt;  &lt;body&gt;    &lt;header&gt;      &lt;h1&gt;Understanding the Critical Rendering Path&lt;/h1&gt;  &lt;/header&gt;  &lt;main&gt;      &lt;h2&gt;Introduction&lt;/h2&gt;      &lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;  &lt;/main&gt;  &lt;footer&gt;      &lt;small&gt;Copyright 2017&lt;/small&gt;  &lt;/footer&gt;&lt;/body&gt;  &lt;/html&gt;\n上述HTML会被解析成如下的DOM树\nHTML很好的特点在于不需要全部加载完成页面所有内容才来显示网页，可以解析完成一部分内容呈现一部分。但是，其他资源比如CSS和JavaScript会阻止页面的渲染。\n#2. 构建CSSOM树CSSOM（CSS Object Model）是一个表示各个DOM相关样式的对象，它的表示方法与DOM相似，但是各个节点存在相关的样式值。不论其是显示、还是隐式声明这些样式。在style.css文件中，我们有如下样式：123456789body &#123; font-size: 18px; &#125;header &#123; color: plum; &#125;  h1 &#123; font-size: 28px; &#125;main &#123; color: firebrick; &#125;  h2 &#123; font-size: 20px; &#125;footer &#123; display: none; &#125;\n接着会创建如下的CSSOM树：\nCSS一直被认为是一种渲染阻塞资源。因此如果在首次加载时没有全部解析资源内容就无法进行渲染树的构建。与HTML不同，CSS具有层叠继承的特性，因此不能进行局部加载。定义在文档后面的样式属性会覆盖或更改写之前定义的同类属性。即，如果如果CSS可以进行局部加载的话会导致出现加载错样式的情况。因此表明，CSS必须全部解析之后才能进行下一步。\n如果CSS文件适用于当前设备的话，仅仅只是会阻塞渲染。&lt;link rel=&quot;stylesheet&quot;&gt;标签可以接受media属性来指定特定样式宽度的特定媒体查询。🌰：如果我们有一个样式表具有orientation:landscape的媒体属性，并且我们查看该页面使用portrait模式，就不会出现资源加载而产生的渲染阻塞情况。\nCSS要会导致脚本阻塞，这是由于JavaScript文件必须等待CSSOM构建结束之后才进行加载。\n#运行JavaScriptJavaScript被认为是解析阻塞资源，这表示当解析HTML文档自身时候会被JavaScript给阻塞掉。\n当解析器解析到&lt;script&gt;标签时，无论该资源是内部还是外链的都会停止解析，并且等到资源被下载并运行结束后才继续进行解析。这也是为什么如果我们有一个引用了JavaScript文件的元素，它必须被放在可视文档元素之外的原因。\n为避免JavaScript解析阻塞，它可以通过设定async属性来要求其异步加载。1&lt;script async src=\"script.js\"&gt;\n#4 创建渲染树(Render Tree)渲染树是DOM树和CSSOM树的结合体，它代表最终会渲染在页面上的元素的结构对象。它表示只会关注可见内容，对于被隐藏或者CSS属性display:none的属性，不会被包含在结构内。\n使用上面例子的DOM和CSSOM，渲染树被创建如下：\n#5. 生成布局布局决定了浏览器视窗大小，它提供了上下文依赖的CSS样式，如百分比或窗口的单位。视窗尺寸通常通过&lt;head&gt;标签中的&lt;meta&gt;中的viewport设定来决定。如果不存在该标签，则通常默认为980px。\n例如：最常用的meta viewport值是设定视窗大小与设备宽度对应：\n1&lt;meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"&gt;\n举个🌰，如果用户使用设备访问网页，宽度为1000px。然后整体视窗尺寸就会基于这个宽度值了，比如50%就是500px,10vw就是100px。\n#6. 绘制页面最后，在绘制页面步骤。页面上的所有可见内容都会被转换为像素并呈现在屏幕上。\n具体的绘制时间跟DOM数以及应用的样式有关。有些样式会话费更多的执行时间，比如复杂的渐变背景图片所需要的计算时间远超过简单固定背景色。\n#整合所有想要看到关键渲染路径的执行流程，可以使用Chrome的DevTools：12345678910111213141516171819&lt;html&gt;  &lt;head&gt;    &lt;title&gt;Understanding the Critical Rendering Path&lt;/title&gt;  &lt;link rel=\"stylesheet\" href=\"style.css\"&gt;&lt;/head&gt;  &lt;body&gt;    &lt;header&gt;      &lt;h1&gt;Understanding the Critical Rendering Path&lt;/h1&gt;  &lt;/header&gt;  &lt;main&gt;      &lt;h2&gt;Introduction&lt;/h2&gt;      &lt;p&gt;Lorem ipsum dolor sit amet&lt;/p&gt;  &lt;/main&gt;  &lt;footer&gt;      &lt;small&gt;Copyright 2017&lt;/small&gt;  &lt;/footer&gt;  &lt;script src=\"main.js\"&gt;&lt;/script&gt;&lt;/body&gt;  &lt;/html&gt;\n可以看关于页面加载时的事件日志，以下是我们获得的：\n\n发送请求：发送GET请求index.html\n解析HTML然后发送请求：开始解析HTML并构建DOM，然后发送GET请求style.css和main.js。\n解析样式表：根据style.css生成CSSOM\n执行计算脚本：执行main.js\n布局：基于HTML的元视窗标签，生成布局\n绘制页面：绘制网页\n","dateCreated":"2017-03-11T22:09:40+08:00","dateModified":"2019-04-13T11:05:44+08:00","datePublished":"2017-03-11T22:09:40+08:00","description":"#(译）理解浏览器的关键渲染路径前些日子在面试的时候有被问及过， 当时的回答不是让面试官很满意，今天刚好在网上看到这篇博文，感觉解释的很好就转了。文章末尾有原文链接地址\n当浏览器接收到从服务器发送过来的HTML页面信息，在将其绘画渲染到屏幕上之前会有许多的步骤要做。浏览器绘制页面需要做的这一系列行为我们称为关键渲染路径。\n了解CRP的知识对于你理解如何提升网站渲染效率非常有用，CRP总共有六步：\n\n构建DOM树\n构建CSSOM树\n运行JavaScript\n创建渲染树\n生成布局\n绘制页面","headline":"理解浏览器的关键渲染路径","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2017/03/11/html5-3/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2017/03/11/html5-3/","keywords":"html, 浏览器加载, 前端杂文"}</script>
     <meta name="description" content="#(译）理解浏览器的关键渲染路径前些日子在面试的时候有被问及过， 当时的回答不是让面试官很满意，今天刚好在网上看到这篇博文，感觉解释的很好就转了。文章末尾有原文链接地址 当浏览器接收到从服务器发送过来的HTML页面信息，在将其绘画渲染到屏幕上之前会有许多的步骤要做。浏览器绘制页面需要做的这一系列行为我们称为关键渲染路径。 了解CRP的知识对于你理解如何提升网站渲染效率非常有用，CRP总共有六步：">
 <meta name="keywords" content="浏览器关键渲染">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="(译）理解浏览器的关键渲染路径">
+<meta property="og:title" content="理解浏览器的关键渲染路径">
 <meta property="og:url" content="http://blog.caoqs.com/2017/03/11/html5-3/index.html">
 <meta property="og:site_name" content="Caoqisen&#39;s Blog">
 <meta property="og:description" content="#(译）理解浏览器的关键渲染路径前些日子在面试的时候有被问及过， 当时的回答不是让面试官很满意，今天刚好在网上看到这篇博文，感觉解释的很好就转了。文章末尾有原文链接地址 当浏览器接收到从服务器发送过来的HTML页面信息，在将其绘画渲染到屏幕上之前会有许多的步骤要做。浏览器绘制页面需要做的这一系列行为我们称为关键渲染路径。 了解CRP的知识对于你理解如何提升网站渲染效率非常有用，CRP总共有六步：">
@@ -29,9 +29,9 @@
 <meta property="og:image" content="https://github.com/lx7575000/Translation/raw/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/resources/52A7B7356D2DE5A100FD0417C732F2BE.jpg">
 <meta property="og:image" content="https://github.com/lx7575000/Translation/raw/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/resources/37531F7B63C81CA9F5E9DE2DC5D06104.jpg">
 <meta property="og:image" content="https://github.com/lx7575000/Translation/raw/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/resources/ADDE5C06B4F85308DD405103BC6DCFF1.jpg">
-<meta property="og:updated_time" content="2019-04-04T06:34:39.145Z">
+<meta property="og:updated_time" content="2019-04-13T03:05:44.955Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="(译）理解浏览器的关键渲染路径">
+<meta name="twitter:title" content="理解浏览器的关键渲染路径">
 <meta name="twitter:description" content="#(译）理解浏览器的关键渲染路径前些日子在面试的时候有被问及过， 当时的回答不是让面试官很满意，今天刚好在网上看到这篇博文，感觉解释的很好就转了。文章末尾有原文链接地址 当浏览器接收到从服务器发送过来的HTML页面信息，在将其绘画渲染到屏幕上之前会有许多的步骤要做。浏览器绘制页面需要做的这一系列行为我们称为关键渲染路径。 了解CRP的知识对于你理解如何提升网站渲染效率非常有用，CRP总共有六步：">
 <meta name="twitter:image" content="https://github.com/lx7575000/Translation/raw/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/resources/33522AF207FEA0A173E582C7AA4F7427.jpg">
 <meta name="twitter:creator" content="@PiNuoC">
@@ -40,7 +40,7 @@
         
     
     
-        <meta property="og:image" content="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"/>
+        <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
     
@@ -74,7 +74,7 @@
             <a class="header-right-picture " href="#about">
         
         
-            <img class="header-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img class="header-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
         </a>
     
@@ -92,11 +92,11 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
                 </a>
                 <h4 class="sidebar-profile-name">Cao qisen</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>程序猿</p>
+                    <h5 class="sidebar-profile-bio"><p>Web front-end development engineer.</p>
 </h5>
                 
             </div>
@@ -171,33 +171,6 @@
                     </a>
             </li>
             
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/PiNuoC/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.facebook.com/qiye.cao.5/" target="_blank" rel="noopener" title="Facebook">
-                    
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="邮箱">
-                    
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">邮箱</span>
-                    </a>
-            </li>
-            
         </ul>
         
             <ul class="sidebar-buttons">
@@ -228,7 +201,7 @@
         <div class="post-header main-content-wrap text-center">
     
         <h1 class="post-title">
-            (译）理解浏览器的关键渲染路径
+            理解浏览器的关键渲染路径
         </h1>
     
     
@@ -285,7 +258,6 @@
 <li>布局：基于HTML的元视窗标签，生成布局</li>
 <li>绘制页面：绘制网页</li>
 </ol>
-<p>文章 by <a href="https://github.com/lx7575000/Translation/blob/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84.md" target="_blank" rel="noopener">lx7575000</a><br><a href="https://bitsofco.de/understanding-the-critical-rendering-path/" target="_blank" rel="noopener">原文链接：Understanding the Critical Rendering Path</a></p>
             
 
         </div>
@@ -519,18 +491,18 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img id="about-card-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
             <h4 id="about-card-name">Cao qisen</h4>
         
-            <div id="about-card-bio"><p>程序猿</p>
+            <div id="about-card-bio"><p>Web front-end development engineer.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>前端开发工程师</p>
+                <p>Web developer</p>
 
             </div>
         
@@ -648,7 +620,7 @@
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/11/html5-3/">
-                            <h3 class="media-heading">(译）理解浏览器的关键渲染路径</h3>
+                            <h3 class="media-heading">理解浏览器的关键渲染路径</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -686,25 +658,6 @@
                             </span>
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p> 最近工作上有遇到绘制环形进度条的需求，绘制环形进度条可以由传统的css3和canvas实现，这边介绍的是canvas的实现方式。<br></p></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/19/wepack-1/">
-                            <h3 class="media-heading">webpack2配置sass</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月19日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><h4 id="首先安装所需要的sass-loader和node-sass"><a href="#首先安装所需要的sass-loader和node-sass" class="headerlink" title="首先安装所需要的sass-loader和node-sass"></a>首先安装所需要的sass-loader和node-sass</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br></pre></td></tr></table></figure></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -754,23 +707,23 @@
                 <div class="media">
                     
                     <div class="media-left">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
                             <img class="media-image" src="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" width="90" height="90">
                         </a>
                     </div>
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
-                            <h3 class="media-heading">Welcome to Tranquilpeak 1.7</h3>
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <h3 class="media-heading">webhook配合node.js实现简单的自动化部署</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2019年4月5日
+                                    2019年4月11日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br></p></div>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -780,7 +733,7 @@
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="没有找到文章" data-message-one="找到 1 篇文章" data-message-other="找到 {n} 篇文章">
-                找到 10 篇文章
+                找到 9 篇文章
             </p>
         </div>
     </div>

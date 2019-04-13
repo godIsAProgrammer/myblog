@@ -15,7 +15,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"},"articleBody":"\nREST是设计风格\nREST通常基于使用HTTP，URI，和XML以及HTML这些现有的广泛流行的协议和标准。\n\n\n资源是由URI来指定。\n对资源的操作包括获取、创建、修改和删除资源，这些操作正好对应HTTP协议提供的GET、POST、PUT和DELETE方法。\n通过操作资源的表现形式来操作资源。\n资源的表现形式则是XML或者HTML，也可以是任何其他的格式。 \n\nRESTful API\n匹配REST设计风格的Web API称为RESTful API。它从以下三个方面资源进行定义：\n\n\n直观简短的资源地址：URI，比如：http://xxx.com/resources/。\n传输的资源：Web服务接受与返回的互联网媒体类型，比如：JSON, XML, YAML等。\n对资源的操作：Web服务在该资源上所支持的一系列请求方法（比如：POST，GET，PUT或DELETE）。\n\nHTTP请求方法在RESTful API中的应用\n\n\n资源\nGET\nPUT\nPOST\nDELETE\n\n\n\n\n一组资源的URI，比如https://xxx.com/resources/\n列出URI，以及该资源组中每个资源的详细信息。\n使用给定的一组资源替换当前整组资源。\n在本组资源中创建/追加一个新的资源。该操作往往返回新资源的URL。\n删除整组资源。\n\n\n单个资源的URI，比如https://xxx.com/resources/142\n获取指定的资源的详细信息，格式可以自选一个合适的网络媒体类型（比如：XML、JSON等）\n替换/创建指定的资源。并将其追加到相应的资源组中。\n    把指定的资源当做一个资源组，并在其下创建/追加一个新的元素，使其隶属于当前资源。\n删除指定的元素。\n\n\n\nREST的优点\n可更高效利用缓存来提高响应速度\n通讯本身的无状态性可以让不同的服务器的处理一系列请求中的不同请求，提高服务器的扩展性\n浏览器即可作为客户端，简化软件需求\n相对于其他叠加在HTTP协议之上的机制，REST的软件依赖性更小\n不需要额外的资源发现机制在软件技术演进中的长期的兼容性更好\n","dateCreated":"2018-06-11T21:56:49+08:00","dateModified":"2019-04-04T14:00:27+08:00","datePublished":"2018-06-11T21:56:49+08:00","description":"什么是REST ？\n  REST（Representational State Transfer）翻译为表现层状态转换，是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议(HTTP)之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。匹配或兼容于这种架构风格(简称为 REST 或 RESTful)的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质(interoperability)。相对于其它种类的网络服务，例如 SOAP服务则是以本身所定义的操作集，来访问网络上的资源。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ——摘自维基百科\n","headline":"RESTful API","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2018/06/11/RESTful/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/","https://twitter.com/PiNuoC/","https://www.facebook.com/qiye.cao.5/","mailto"],"image":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no","logo":{"@type":"ImageObject","url":"https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"}},"url":"http://blog.caoqs.com/2018/06/11/RESTful/","keywords":"REST"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"\nREST是设计风格\nREST通常基于使用HTTP，URI，和XML以及HTML这些现有的广泛流行的协议和标准。\n\n\n资源是由URI来指定。\n对资源的操作包括获取、创建、修改和删除资源，这些操作正好对应HTTP协议提供的GET、POST、PUT和DELETE方法。\n通过操作资源的表现形式来操作资源。\n资源的表现形式则是XML或者HTML，也可以是任何其他的格式。 \n\nRESTful API\n匹配REST设计风格的Web API称为RESTful API。它从以下三个方面资源进行定义：\n\n\n直观简短的资源地址：URI，比如：http://xxx.com/resources/。\n传输的资源：Web服务接受与返回的互联网媒体类型，比如：JSON, XML, YAML等。\n对资源的操作：Web服务在该资源上所支持的一系列请求方法（比如：POST，GET，PUT或DELETE）。\n\nHTTP请求方法在RESTful API中的应用\n\n\n资源\nGET\nPUT\nPOST\nDELETE\n\n\n\n\n一组资源的URI，比如https://xxx.com/resources/\n列出URI，以及该资源组中每个资源的详细信息。\n使用给定的一组资源替换当前整组资源。\n在本组资源中创建/追加一个新的资源。该操作往往返回新资源的URL。\n删除整组资源。\n\n\n单个资源的URI，比如https://xxx.com/resources/142\n获取指定的资源的详细信息，格式可以自选一个合适的网络媒体类型（比如：XML、JSON等）\n替换/创建指定的资源。并将其追加到相应的资源组中。\n    把指定的资源当做一个资源组，并在其下创建/追加一个新的元素，使其隶属于当前资源。\n删除指定的元素。\n\n\n\nREST的优点\n可更高效利用缓存来提高响应速度\n通讯本身的无状态性可以让不同的服务器的处理一系列请求中的不同请求，提高服务器的扩展性\n浏览器即可作为客户端，简化软件需求\n相对于其他叠加在HTTP协议之上的机制，REST的软件依赖性更小\n不需要额外的资源发现机制在软件技术演进中的长期的兼容性更好\n","dateCreated":"2018-06-11T21:56:49+08:00","dateModified":"2019-04-04T14:00:27+08:00","datePublished":"2018-06-11T21:56:49+08:00","description":"什么是REST ？\n  REST（Representational State Transfer）翻译为表现层状态转换，是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议(HTTP)之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格。匹配或兼容于这种架构风格(简称为 REST 或 RESTful)的网络服务，允许客户端发出以统一资源标识符访问和操作网络资源的请求，而与预先定义好的无状态操作集一致化。因此表现层状态转换提供了在互联网络的计算系统之间，彼此资源可交互使用的协作性质(interoperability)。相对于其它种类的网络服务，例如 SOAP服务则是以本身所定义的操作集，来访问网络上的资源。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ——摘自维基百科\n","headline":"RESTful API","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2018/06/11/RESTful/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2018/06/11/RESTful/","keywords":"REST"}</script>
     <meta name="description" content="什么是REST ？   REST（Representational State Transfer）翻译为表现层状态转换，是Roy Thomas Fielding博士于2000年在他的博士论文中提出来的一种万维网软件架构风格，目的是便于不同软件/程序在网络（例如互联网）中互相传递信息。表现层状态转换是根基于超文本传输协议(HTTP)之上而确定的一组约束和属性，是一种设计提供万维网络服务的软件构建风格">
 <meta name="keywords" content="REST">
 <meta property="og:type" content="blog">
@@ -34,7 +34,7 @@
         
     
     
-        <meta property="og:image" content="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no"/>
+        <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
     
@@ -68,7 +68,7 @@
             <a class="header-right-picture " href="#about">
         
         
-            <img class="header-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img class="header-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
         </a>
     
@@ -86,11 +86,11 @@
         
             <div class="sidebar-profile">
                 <a href="/#about">
-                    <img class="sidebar-profile-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+                    <img class="sidebar-profile-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
                 </a>
                 <h4 class="sidebar-profile-name">Cao qisen</h4>
                 
-                    <h5 class="sidebar-profile-bio"><p>程序猿</p>
+                    <h5 class="sidebar-profile-bio"><p>Web front-end development engineer.</p>
 </h5>
                 
             </div>
@@ -162,33 +162,6 @@
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://twitter.com/PiNuoC/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.facebook.com/qiye.cao.5/" target="_blank" rel="noopener" title="Facebook">
-                    
-                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Facebook</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="邮箱">
-                    
-                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">邮箱</span>
                     </a>
             </li>
             
@@ -322,7 +295,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/19/wepack-1/" data-tooltip="webpack2配置sass" aria-label="下一篇: webpack2配置sass">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/14/canvas-1/" data-tooltip="canvas 绘制环形进度条" aria-label="下一篇: canvas 绘制环形进度条">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -418,7 +391,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/19/wepack-1/" data-tooltip="webpack2配置sass" aria-label="下一篇: webpack2配置sass">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2017/03/14/canvas-1/" data-tooltip="canvas 绘制环形进度条" aria-label="下一篇: canvas 绘制环形进度条">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -526,18 +499,18 @@
             <i class="fa fa-times"></i>
         </div>
         
-            <img id="about-card-picture" src="https://lh3.googleusercontent.com/LBFTlLk_VQHlOJ46MpODshuWne0RKKHf4qlqqK0qm9EdZwhm1gj5ayu6AbvDmwZVFwhdla3QJq79bhRC3zVv7fXglxct3acuaraoPQgFrglzFa2hODcITYwF83RS0mI7RvIZLZbUxHGIcrHwLxtoJXjyHVwUC2VNJTRA9PDK3In4mESIRfazkiwHen_6_xyEKZF5zfXJNVWDOtvHV4UTjvZuHVR4ouFuEb6kV3FwgjXUjJ-8IORv76V3E5XzVpfUVr_m4QTi6gIfjPh4K6b2Hb3JOeskbVOXTpBLYp-4276p1wAii6e7YQTxdC-iVv2QdxqbHtNWRCZdwz4xTlC1ca0MdtPKbZkk8kcZ73rPgoZcMcF_cbupCLf5LRNk7qPqh9vzk4JfUCEjn80AMhsXBWitCU0lu84VzGZHSyTtt4_bDvgM_MVjs3MkXvitwU1XjZ-xMEI0wGrdqo9B1P60U-BCMTThO1NKv-dxmZHpwfD1aA9Yvi4yDDv7SADCSu1PAxuOOR80S18zQyClePjbEieLjNhKY2ZV4l0OsIbu8OtuhUnIE6QsIuuzx_7y9fkNNmauA133XPQXlOyJY6x7PQIu65N_MRQ-Qhz4JhuLSrU9vQNT6DeXNk69QryfPgABnTJROcvNU5ioHajlbg07SIJjV9HzCaM=w1080-h1440-no" alt="作者的图片">
+            <img id="about-card-picture" src="/assets/images/avatar.jpeg" alt="作者的图片">
         
             <h4 id="about-card-name">Cao qisen</h4>
         
-            <div id="about-card-bio"><p>程序猿</p>
+            <div id="about-card-bio"><p>Web front-end development engineer.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>前端开发工程师</p>
+                <p>Web developer</p>
 
             </div>
         
@@ -655,7 +628,7 @@
                     
                     <div class="media-body">
                         <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/11/html5-3/">
-                            <h3 class="media-heading">(译）理解浏览器的关键渲染路径</h3>
+                            <h3 class="media-heading">理解浏览器的关键渲染路径</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
@@ -693,25 +666,6 @@
                             </span>
                         </span>
                         <div class="media-content hide-xs font-merryweather"><p> 最近工作上有遇到绘制环形进度条的需求，绘制环形进度条可以由传统的css3和canvas实现，这边介绍的是canvas的实现方式。<br></p></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2017/03/19/wepack-1/">
-                            <h3 class="media-heading">webpack2配置sass</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2017年3月19日
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"><h4 id="首先安装所需要的sass-loader和node-sass"><a href="#首先安装所需要的sass-loader和node-sass" class="headerlink" title="首先安装所需要的sass-loader和node-sass"></a>首先安装所需要的sass-loader和node-sass</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install sass-loader node-sass webpack --save-dev</span><br></pre></td></tr></table></figure></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -761,23 +715,23 @@
                 <div class="media">
                     
                     <div class="media-left">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
                             <img class="media-image" src="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city-750.jpg" width="90" height="90">
                         </a>
                     </div>
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/05/hello-world/">
-                            <h3 class="media-heading">Welcome to Tranquilpeak 1.7</h3>
+                        <a class="link-unstyled" href="http://blog.caoqs.com/2019/04/11/webhook/">
+                            <h3 class="media-heading">webhook配合node.js实现简单的自动化部署</h3>
                         </a>
                         <span class="media-meta">
                             <span class="media-date text-small">
                                 
-                                    2019年4月5日
+                                    2019年4月11日
                                 
                             </span>
                         </span>
-                        <div class="media-content hide-xs font-merryweather"><p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.<br></p></div>
+                        <div class="media-content hide-xs font-merryweather"><h3 id="什么是webhook？"><a href="#什么是webhook？" class="headerlink" title="什么是webhook？"></a>什么是webhook？</h3><p>  webhook（也称为Web回调或HTTP推送API）是应用程序为其他应用程序提供实时信息的一种方式。 webhook会在发生时将数据传递给其他应用程序，这意味着可以立即获取数据。与典型的API不同，你不需要非常频繁地轮询数据才能实时获取数据。这使得webhooks对提供者和消费者都更有效。 </p></div>
                     </div>
                     <div style="clear:both;"></div>
                     <hr>
@@ -787,7 +741,7 @@
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="没有找到文章" data-message-one="找到 1 篇文章" data-message-other="找到 {n} 篇文章">
-                找到 10 篇文章
+                找到 9 篇文章
             </p>
         </div>
     </div>

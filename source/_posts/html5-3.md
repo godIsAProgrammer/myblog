@@ -1,5 +1,5 @@
 ---
-title: (译）理解浏览器的关键渲染路径
+title: 理解浏览器的关键渲染路径
 date: 2017-03-11 22:09:40
 categories:
 - 浏览器渲染
@@ -147,7 +147,4 @@ JavaScript被认为是**解析阻塞资源**，这表示当解析HTML文档自�
 5. 布局：基于HTML的元视窗标签，生成布局
 6. 绘制页面：绘制网页
 
-
-文章 by [lx7575000](https://github.com/lx7575000/Translation/blob/master/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84/%EF%BC%88%E8%AF%91%EF%BC%89%E7%90%86%E8%A7%A3%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%B3%E9%94%AE%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84.md) 
-[原文链接：Understanding the Critical Rendering Path](https://bitsofco.de/understanding-the-critical-rendering-path/)
 
