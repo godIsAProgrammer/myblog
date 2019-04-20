@@ -6,27 +6,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Caoqisen&#39;s Blog">
-    <title>标签: CSS - Caoqisen&#39;s Blog</title>
+    <title>Verdaccio - Caoqisen&#39;s Blog</title>
     <meta name="author" content="Cao qisen">
     
-        <meta name="keywords" content="JavaScript,react,">
+        <meta name="keywords" content="JavaScript,react,verdaccio,npm">
     
     
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{}</script>
-    <meta name="description" content="拥抱每一天的🌞">
-<meta name="keywords" content="JavaScript,react">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg"},"articleBody":"\nVerdaccio 是什么？  Verdaccio 是一个轻量的私有npm proxy registry。\nVerdaccio有哪些特点？\nVerdaccio 支持 npm、yarn和npnm等主流的npm客户端\n支持Docker和 Kubernetes Helm部署\nVerdaccio 是基于插件的，支持身份验证、中间件和存储插件\n\n\n服务器上安装最低要求:\n\nNode.js 版本对于 verdaccio@3.x 版本，Node v6.12. 是最低支持版本。对于 verdaccio@4.0.0-alpha.x 或 verdaccio@4.x版本， Node 8.x (LTS “Carbon”) 是最低支持版本。\nnpm &gt;=4.x 或 yarn &gt; 我们强烈建议使用最新的 Node 包管理客户端 &gt; npm@5.x | yarn@1.x | pnpm@2.x\nWeb 界面支持 Chrome, Firefox, Edge, 和 IE11 浏览器。\n\n安装Verdaccio CLI1、 npm进行 全局安装:  1npm install -g verdaccio --unsafe-perm\n  加上–unsafe-perm选项是为了防止gyp ERR! permission denied权限问题报错\n  \n2、使用ln命令给 verdaccio 配置“快捷方式”:ln -s /app/node-v10.15.0-linux-x64/lib/node_modules/verdaccio/bin/verdaccio /usr/local/bin/verdaccio\n  \n3、 运行 verdaccio:  verdaccio\n  \n\nconfig file 默认配置文件路径位置(更多配置信息)\nPlugin successfully 插件加载信息\nhttp address 默认访问地址\n\n4、在config.yaml配置中添加 listen 配置: \n5、 使用 pm2 守护 verdaccio 进程6、 访问搭建好的私有仓库:  在浏览器中访问 https://你的服务器外网IP:4873    能访问到这个界面说明部署成功了\n7、 注册登录 verdaccio:  执行命令  npm adduser --registry  http://118.24.154.202:4873\n  \n8、 在本地创建一个npm包然后执行:  npm publish --registry http://118.24.154.202:4873\n  \n9、 刷新仓库页面，你就能看就你上传的 npm 包，这样你的私有库就部署成功了！  \n","dateCreated":"2019-04-20T10:51:18+08:00","dateModified":"2019-04-20T13:58:38+08:00","datePublished":"2019-04-20T10:51:18+08:00","description":"\nVerdaccio 是什么？  Verdaccio 是一个轻量的私有npm proxy registry。\nVerdaccio有哪些特点？\nVerdaccio 支持 npm、yarn和npnm等主流的npm客户端\n支持Docker和 Kubernetes Helm部署\nVerdaccio 是基于插件的，支持身份验证、中间件和存储插件","headline":"Verdaccio","image":["https://verdaccio.org/docs/assets/logo/banner/png/verdaccio-banner@3x.png","http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"],"mainEntityOfPage":{"@type":"WebPage","@id":"http://blog.caoqs.com/2019/04/20/verdaccio/"},"publisher":{"@type":"Organization","name":"Cao qisen","sameAs":["https://github.com/godIsAProgrammer/"],"image":"avatar.jpeg","logo":{"@type":"ImageObject","url":"avatar.jpeg"}},"url":"http://blog.caoqs.com/2019/04/20/verdaccio/","keywords":"verdaccio, npm, 私有库","thumbnailUrl":"https://verdaccio.org/docs/assets/logo/banner/png/verdaccio-banner@3x.png"}</script>
+    <meta name="description" content="Verdaccio 是什么？  Verdaccio 是一个轻量的私有npm proxy registry。 Verdaccio有哪些特点？ Verdaccio 支持 npm、yarn和npnm等主流的npm客户端 支持Docker和 Kubernetes Helm部署 Verdaccio 是基于插件的，支持身份验证、中间件和存储插件">
+<meta name="keywords" content="verdaccio,npm">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Caoqisen&#39;s Blog">
-<meta property="og:url" content="http://blog.caoqs.com/tags/CSS/index.html">
+<meta property="og:title" content="Verdaccio">
+<meta property="og:url" content="http://blog.caoqs.com/2019/04/20/verdaccio/index.html">
 <meta property="og:site_name" content="Caoqisen&#39;s Blog">
-<meta property="og:description" content="拥抱每一天的🌞">
+<meta property="og:description" content="Verdaccio 是什么？  Verdaccio 是一个轻量的私有npm proxy registry。 Verdaccio有哪些特点？ Verdaccio 支持 npm、yarn和npnm等主流的npm客户端 支持Docker和 Kubernetes Helm部署 Verdaccio 是基于插件的，支持身份验证、中间件和存储插件">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://img.shields.io/badge/link-996.icu-red.svg">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio1.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio2.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio3.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio6.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio8.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio10.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio11.png">
+<meta property="og:image" content="http://blog.caoqs.com/assets/images/verdaccio12.png">
+<meta property="og:updated_time" content="2019-04-20T05:58:38.766Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Caoqisen&#39;s Blog">
-<meta name="twitter:description" content="拥抱每一天的🌞">
+<meta name="twitter:title" content="Verdaccio">
+<meta name="twitter:description" content="Verdaccio 是什么？  Verdaccio 是一个轻量的私有npm proxy registry。 Verdaccio有哪些特点？ Verdaccio 支持 npm、yarn和npnm等主流的npm客户端 支持Docker和 Kubernetes Helm部署 Verdaccio 是基于插件的，支持身份验证、中间件和存储插件">
+<meta name="twitter:image" content="https://img.shields.io/badge/link-996.icu-red.svg">
 <meta name="twitter:creator" content="@PiNuoC">
     
     
@@ -36,6 +47,12 @@
         <meta property="og:image" content="http://blog.caoqs.com/assets/images/avatar.jpeg"/>
     
     
+        <meta property="og:image" content="https://verdaccio.org/docs/assets/logo/banner/png/verdaccio-banner@3x.png"/>
+        <meta class="swiftype" name="image" data-type="enum" content="https://verdaccio.org/docs/assets/logo/banner/png/verdaccio-banner@3x.png" />
+    
+    
+        <meta property="og:image" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg"/>
+        <meta class="swiftype" name="image" data-type="enum" content="http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg" />
     
     
     <!--STYLES-->
@@ -57,7 +74,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">Caoqisen&#39;s Blog</a>
@@ -80,7 +97,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -183,101 +200,180 @@
 </nav>
 
             
-            <div id="main" data-behavior="1"
-                 class="
+        <div class="post-header-cover
+                    text-center
+                    " style="background-image:url('http://d1u9biwaxjngwg.cloudfront.net/welcome-to-tranquilpeak/city.jpg');" data-behavior="4">
+            
+                <div class="post-header main-content-wrap text-center">
+    
+        <h1 class="post-title">
+            Verdaccio
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2019-04-20T10:51:18+08:00">
+	
+		    4月 20, 2019
+    	
+    </time>
+    
+        <span>发布在 </span>
+        
+    <a class="category-link" href="/categories/verdaccio/">verdaccio</a>, <a class="category-link" href="/categories/verdaccio/npm/">npm</a>
+
+
+    
+</div>
+
+    
+</div>
+
+            
+        </div>
+
+            <div id="main" data-behavior="4"
+                 class="hasCover
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-right">
-        <div class="postShorten-wrap">
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <p><a href="https://996.icu" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a></p>
+<h3 id="Verdaccio-是什么？"><a href="#Verdaccio-是什么？" class="headerlink" title="Verdaccio 是什么？"></a>Verdaccio 是什么？</h3><p>  Verdaccio 是一个轻量的私有npm proxy registry。</p>
+<h3 id="Verdaccio有哪些特点？"><a href="#Verdaccio有哪些特点？" class="headerlink" title="Verdaccio有哪些特点？"></a>Verdaccio有哪些特点？</h3><ul>
+<li>Verdaccio 支持 npm、yarn和npnm等主流的npm客户端</li>
+<li>支持Docker和 Kubernetes Helm部署</li>
+<li>Verdaccio 是基于插件的，支持身份验证、中间件和存储插件<a id="more"></a>
+</li>
+</ul>
+<h3 id="服务器上安装"><a href="#服务器上安装" class="headerlink" title="服务器上安装"></a>服务器上安装</h3><p><strong>最低要求:</strong></p>
+<ul>
+<li>Node.js 版本<br>对于 <a href="mailto:verdaccio@3.x" target="_blank" rel="noopener">verdaccio@3.x</a> 版本，Node v6.12. 是最低支持版本。<br>对于 <a href="mailto:verdaccio@4.0.0-alpha.x" target="_blank" rel="noopener">verdaccio@4.0.0-alpha.x</a> 或 <a href="mailto:verdaccio@4.x" target="_blank" rel="noopener">verdaccio@4.x</a>版本， Node 8.x (LTS “Carbon”) 是最低支持版本。</li>
+<li>npm &gt;=4.x 或 yarn &gt; 我们强烈建议使用最新的 Node 包管理客户端 &gt; <a href="mailto:npm@5.x" target="_blank" rel="noopener">npm@5.x</a> | <a href="mailto:yarn@1.x" target="_blank" rel="noopener">yarn@1.x</a> | <a href="mailto:pnpm@2.x" target="_blank" rel="noopener">pnpm@2.x</a></li>
+<li>Web 界面支持 Chrome, Firefox, Edge, 和 IE11 浏览器。</li>
+</ul>
+<h6 id="安装Verdaccio-CLI"><a href="#安装Verdaccio-CLI" class="headerlink" title="安装Verdaccio CLI"></a>安装Verdaccio CLI</h6><h6 id="1、-npm进行-全局安装"><a href="#1、-npm进行-全局安装" class="headerlink" title="1、 npm进行 全局安装:"></a>1、 npm进行 全局安装:</h6>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g verdaccio --unsafe-perm</span><br></pre></td></tr></table></figure>
+<p>  <strong>加上–unsafe-perm选项是为了防止gyp ERR! permission denied权限问题报错</strong></p>
+<p>  <img src="/assets/images/verdaccio1.png" alt="服务器安装verdaccio"></p>
+<h6 id="2、使用ln命令给-verdaccio-配置“快捷方式”"><a href="#2、使用ln命令给-verdaccio-配置“快捷方式”" class="headerlink" title="2、使用ln命令给 verdaccio 配置“快捷方式”:"></a>2、使用<a href="http://man.linuxde.net/ln" target="_blank" rel="noopener">ln</a>命令给 verdaccio 配置“快捷方式”:</h6><p><code>ln -s /app/node-v10.15.0-linux-x64/lib/node_modules/verdaccio/bin/verdaccio /usr/local/bin/verdaccio</code></p>
+<p>  <img src="/assets/images/verdaccio2.png" alt="ln"></p>
+<h6 id="3、-运行-verdaccio"><a href="#3、-运行-verdaccio" class="headerlink" title="3、 运行 verdaccio:"></a>3、 运行 verdaccio:</h6><p>  <code>verdaccio</code></p>
+<p>  <img src="/assets/images/verdaccio3.png" alt="verdaccio"></p>
+<ul>
+<li>config file 默认配置文件路径位置(<a href="https://verdaccio.org/docs/zh-CN/configuration" target="_blank" rel="noopener">更多配置信息</a>)</li>
+<li>Plugin successfully 插件加载信息</li>
+<li>http address 默认访问地址</li>
+</ul>
+<h6 id="4、在config-yaml配置中添加-listen-配置"><a href="#4、在config-yaml配置中添加-listen-配置" class="headerlink" title="4、在config.yaml配置中添加 listen 配置:"></a>4、在config.yaml配置中添加 listen 配置:</h6><p> <img src="/assets/images/verdaccio6.png" alt="verdaccio"></p>
+<h6 id="5、-使用-pm2-守护-verdaccio-进程"><a href="#5、-使用-pm2-守护-verdaccio-进程" class="headerlink" title="5、 使用 pm2 守护 verdaccio 进程"></a>5、 使用 <a href="https://www.npmjs.com/package/pm2" target="_blank" rel="noopener">pm2</a> 守护 verdaccio 进程</h6><h6 id="6、-访问搭建好的私有仓库"><a href="#6、-访问搭建好的私有仓库" class="headerlink" title="6、 访问搭建好的私有仓库:"></a>6、 访问搭建好的私有仓库:</h6><p>  在浏览器中访问 https://你的服务器外网IP:4873<br>  <img src="/assets/images/verdaccio8.png" alt="verdaccio"><br>  能访问到这个界面说明部署成功了</p>
+<h6 id="7、-注册登录-verdaccio"><a href="#7、-注册登录-verdaccio" class="headerlink" title="7、 注册登录 verdaccio:"></a>7、 注册登录 verdaccio:</h6><p>  执行命令<br>  <code>npm adduser --registry  http://118.24.154.202:4873</code></p>
+<p>  <img src="/assets/images/verdaccio10.png" alt="verdaccio"></p>
+<h6 id="8、-在本地创建一个npm包然后执行"><a href="#8、-在本地创建一个npm包然后执行" class="headerlink" title="8、 在本地创建一个npm包然后执行:"></a>8、 在本地创建一个npm包然后执行:</h6><p>  <code>npm publish --registry http://118.24.154.202:4873</code></p>
+<p>  <img src="/assets/images/verdaccio11.png" alt="verdaccio"></p>
+<h6 id="9、-刷新仓库页面，你就能看就你上传的-npm-包，这样你的私有库就部署成功了！"><a href="#9、-刷新仓库页面，你就能看就你上传的-npm-包，这样你的私有库就部署成功了！" class="headerlink" title="9、 刷新仓库页面，你就能看就你上传的 npm 包，这样你的私有库就部署成功了！"></a>9、 刷新仓库页面，你就能看就你上传的 npm 包，这样你的私有库就部署成功了！</h6><p>  <img src="/assets/images/verdaccio12.png" alt="verdaccio"></p>
+
             
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2017/03/04/css-2/">
-                            chrome input autofill 自动填充背景色问题
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2017-03-04T23:17:52+08:00">
-	
-		    3月 04, 2017
-    	
-    </time>
-    
-</div>
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">标签</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/npm/">npm</a> <a class="tag tag--primary tag--small t-link" href="/tags/verdaccio/">verdaccio</a> <a class="tag tag--primary tag--small t-link" href="/tags/私有库/">私有库</a>
 
             </div>
-            
-                <div class="postShorten-excerpt">
-                    <p>在<a href="http://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete" target="_blank" rel="noopener">stackoverflow</a>发现解决方法如下：</p>
-<h2 id="方法一：box-shadow"><a href="#方法一：box-shadow" class="headerlink" title="方法一：box-shadow"></a>方法一：box-shadow</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:-webkit-autofill</span> &#123;</span><br><span class="line">    <span class="attribute">-webkit-box-shadow</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0px</span> <span class="number">1000px</span> white inset;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="box-shadow-h-shadow-v-shadow-blur-spread-color-inset"><a href="#box-shadow-h-shadow-v-shadow-blur-spread-color-inset" class="headerlink" title="box-shadow: h-shadow v-shadow blur spread color inset;"></a>box-shadow: h-shadow v-shadow blur spread color inset;</h3>
-                    
-                        <a href="/2017/03/04/css-2/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </div>
-            
-        </div>
-        
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-right">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2017/02/24/css-1/">
-                            CSS中一个冒号和两个冒号有什么区别
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2017-02-24T22:53:00+08:00">
-	
-		    2月 24, 2017
-    	
-    </time>
-    
-</div>
-
-            </div>
-            
-                <div class="postShorten-excerpt">
-                    <p>在平时工作中用到伪类选择器的时候一个冒号和两个冒号貌似都是可以的，所以两者到底有什么区别呢，我们先来看下W3C关于CSS3选择器的规范中有一段描述： </p>
-<p>　　A pseudo-element is made of two colons (::) followed by the name of the pseudo-element. </p>
-<p>　　This :: notation is introduced by the current document in order to establish a discrimination between pseudo-classes and pseudo-elements. For compatibility with existing style sheets, user agents must also accept the previous one-colon notation for pseudo-elements introduced in CSS levels 1 and 2 (namely, :first-line, :first-letter, :before and :after). This compatibility is not allowed for the new pseudo-elements introduced in CSS level 3. </p>
-<p>　　简单翻译一下，大意就是，伪元素由双冒号和伪元素名称组成。双冒号是在当前规范中引入的，用于区分伪类和伪元素。但是伪类兼容现存样式，浏览器需要同时支持旧的伪类，比如:first-line、:first-letter、:before、:after等。<br>那么问题来了，什么是伪类？什么是伪元素？<br>
-                    
-                        <a href="/2017/02/24/css-1/" class="postShorten-excerpt_link link">
-                            阅读全文
-                        </a>
-                        
-                    
-                </p></div>
-            
-        </div>
-        
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
         
         
-        <li class="pagination-number">第 1 页 共 1 页</li>
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/11/webhook/" data-tooltip="webhook配合node.js实现简单的自动化部署" aria-label="下一篇: webhook配合node.js实现简单的自动化部署">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Twitter">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -287,6 +383,115 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">上一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/11/webhook/" data-tooltip="webhook配合node.js实现简单的自动化部署" aria-label="下一篇: webhook配合node.js实现简单的自动化部署">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">下一篇</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Facebook">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Twitter">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/20/verdaccio/" title="分享到 Google+">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://blog.caoqs.com/2019/04/20/verdaccio/">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>分享到 Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://blog.caoqs.com/2019/04/20/verdaccio/">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>分享到 Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://blog.caoqs.com/2019/04/20/verdaccio/">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>分享到 Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -587,6 +792,25 @@
         <!--SCRIPTS-->
 <script src="/assets/js/script-dbd16rvloemmuxdzniplmnxxvwoz24eya9wol0b7vvmlokgqsjivmb8dnscy.min.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'http://blog.caoqs.com/2019/04/20/verdaccio/';
+                 
+                    this.page.identifier = '2019/04/20/verdaccio/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'caoqisen';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>

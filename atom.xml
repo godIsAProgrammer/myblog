@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.caoqs.com/"/>
-  <updated>2019-04-13T04:58:59.683Z</updated>
+  <updated>2019-04-20T05:58:38.766Z</updated>
   <id>http://blog.caoqs.com/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Verdaccio</title>
+    <link href="http://blog.caoqs.com/2019/04/20/verdaccio/"/>
+    <id>http://blog.caoqs.com/2019/04/20/verdaccio/</id>
+    <published>2019-04-20T02:51:18.000Z</published>
+    <updated>2019-04-20T05:58:38.766Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://996.icu" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu"></a></p><h3 id="Verdaccio-是什么？"><a href="#Verdaccio-是什么？" class="headerlink" title="Verdaccio 是什么？"></a>Verdaccio 是什么？</h3><p>  Verdaccio 是一个轻量的私有npm proxy registry。</p><h3 id="Verdaccio有哪些特点？"><a href="#Verdaccio有哪些特点？" class="headerlink" title="Verdaccio有哪些特点？"></a>Verdaccio有哪些特点？</h3><ul><li>Verdaccio 支持 npm、yarn和npnm等主流的npm客户端</li><li>支持Docker和 Kubernetes Helm部署</li><li>Verdaccio 是基于插件的，支持身份验证、中间件和存储插件<a id="more"></a></li></ul><h3 id="服务器上安装"><a href="#服务器上安装" class="headerlink" title="服务器上安装"></a>服务器上安装</h3><p><strong>最低要求:</strong></p><ul><li>Node.js 版本<br>对于 <a href="mailto:verdaccio@3.x" target="_blank" rel="noopener">verdaccio@3.x</a> 版本，Node v6.12. 是最低支持版本。<br>对于 <a href="mailto:verdaccio@4.0.0-alpha.x" target="_blank" rel="noopener">verdaccio@4.0.0-alpha.x</a> 或 <a href="mailto:verdaccio@4.x" target="_blank" rel="noopener">verdaccio@4.x</a>版本， Node 8.x (LTS “Carbon”) 是最低支持版本。</li><li>npm &gt;=4.x 或 yarn &gt; 我们强烈建议使用最新的 Node 包管理客户端 &gt; <a href="mailto:npm@5.x" target="_blank" rel="noopener">npm@5.x</a> | <a href="mailto:yarn@1.x" target="_blank" rel="noopener">yarn@1.x</a> | <a href="mailto:pnpm@2.x" target="_blank" rel="noopener">pnpm@2.x</a></li><li>Web 界面支持 Chrome, Firefox, Edge, 和 IE11 浏览器。</li></ul><h6 id="安装Verdaccio-CLI"><a href="#安装Verdaccio-CLI" class="headerlink" title="安装Verdaccio CLI"></a>安装Verdaccio CLI</h6><h6 id="1、-npm进行-全局安装"><a href="#1、-npm进行-全局安装" class="headerlink" title="1、 npm进行 全局安装:"></a>1、 npm进行 全局安装:</h6>  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g verdaccio --unsafe-perm</span><br></pre></td></tr></table></figure><p>  <strong>加上–unsafe-perm选项是为了防止gyp ERR! permission denied权限问题报错</strong></p><p>  <img src="/assets/images/verdaccio1.png" alt="服务器安装verdaccio"></p><h6 id="2、使用ln命令给-verdaccio-配置“快捷方式”"><a href="#2、使用ln命令给-verdaccio-配置“快捷方式”" class="headerlink" title="2、使用ln命令给 verdaccio 配置“快捷方式”:"></a>2、使用<a href="http://man.linuxde.net/ln" target="_blank" rel="noopener">ln</a>命令给 verdaccio 配置“快捷方式”:</h6><p><code>ln -s /app/node-v10.15.0-linux-x64/lib/node_modules/verdaccio/bin/verdaccio /usr/local/bin/verdaccio</code></p><p>  <img src="/assets/images/verdaccio2.png" alt="ln"></p><h6 id="3、-运行-verdaccio"><a href="#3、-运行-verdaccio" class="headerlink" title="3、 运行 verdaccio:"></a>3、 运行 verdaccio:</h6><p>  <code>verdaccio</code></p><p>  <img src="/assets/images/verdaccio3.png" alt="verdaccio"></p><ul><li>config file 默认配置文件路径位置(<a href="https://verdaccio.org/docs/zh-CN/configuration" target="_blank" rel="noopener">更多配置信息</a>)</li><li>Plugin successfully 插件加载信息</li><li>http address 默认访问地址</li></ul><h6 id="4、在config-yaml配置中添加-listen-配置"><a href="#4、在config-yaml配置中添加-listen-配置" class="headerlink" title="4、在config.yaml配置中添加 listen 配置:"></a>4、在config.yaml配置中添加 listen 配置:</h6><p> <img src="/assets/images/verdaccio6.png" alt="verdaccio"></p><h6 id="5、-使用-pm2-守护-verdaccio-进程"><a href="#5、-使用-pm2-守护-verdaccio-进程" class="headerlink" title="5、 使用 pm2 守护 verdaccio 进程"></a>5、 使用 <a href="https://www.npmjs.com/package/pm2" target="_blank" rel="noopener">pm2</a> 守护 verdaccio 进程</h6><h6 id="6、-访问搭建好的私有仓库"><a href="#6、-访问搭建好的私有仓库" class="headerlink" title="6、 访问搭建好的私有仓库:"></a>6、 访问搭建好的私有仓库:</h6><p>  在浏览器中访问 https://你的服务器外网IP:4873<br>  <img src="/assets/images/verdaccio8.png" alt="verdaccio"><br>  能访问到这个界面说明部署成功了</p><h6 id="7、-注册登录-verdaccio"><a href="#7、-注册登录-verdaccio" class="headerlink" title="7、 注册登录 verdaccio:"></a>7、 注册登录 verdaccio:</h6><p>  执行命令<br>  <code>npm adduser --registry  http://118.24.154.202:4873</code></p><p>  <img src="/assets/images/verdaccio10.png" alt="verdaccio"></p><h6 id="8、-在本地创建一个npm包然后执行"><a href="#8、-在本地创建一个npm包然后执行" class="headerlink" title="8、 在本地创建一个npm包然后执行:"></a>8、 在本地创建一个npm包然后执行:</h6><p>  <code>npm publish --registry http://118.24.154.202:4873</code></p><p>  <img src="/assets/images/verdaccio11.png" alt="verdaccio"></p><h6 id="9、-刷新仓库页面，你就能看就你上传的-npm-包，这样你的私有库就部署成功了！"><a href="#9、-刷新仓库页面，你就能看就你上传的-npm-包，这样你的私有库就部署成功了！" class="headerlink" title="9、 刷新仓库页面，你就能看就你上传的 npm 包，这样你的私有库就部署成功了！"></a>9、 刷新仓库页面，你就能看就你上传的 npm 包，这样你的私有库就部署成功了！</h6><p>  <img src="/assets/images/verdaccio12.png" alt="verdaccio"></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;a href=&quot;https://996.icu&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;&lt;img src=&quot;https://img.shields.io/badge/link-996.icu-red.svg&quot; alt=&quot;996.icu&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Verdaccio-是什么？&quot;&gt;&lt;a href=&quot;#Verdaccio-是什么？&quot; class=&quot;headerlink&quot; title=&quot;Verdaccio 是什么？&quot;&gt;&lt;/a&gt;Verdaccio 是什么？&lt;/h3&gt;&lt;p&gt;  Verdaccio 是一个轻量的私有npm proxy registry。&lt;/p&gt;
+&lt;h3 id=&quot;Verdaccio有哪些特点？&quot;&gt;&lt;a href=&quot;#Verdaccio有哪些特点？&quot; class=&quot;headerlink&quot; title=&quot;Verdaccio有哪些特点？&quot;&gt;&lt;/a&gt;Verdaccio有哪些特点？&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Verdaccio 支持 npm、yarn和npnm等主流的npm客户端&lt;/li&gt;
+&lt;li&gt;支持Docker和 Kubernetes Helm部署&lt;/li&gt;
+&lt;li&gt;Verdaccio 是基于插件的，支持身份验证、中间件和存储插件
+    
+    </summary>
+    
+      <category term="verdaccio" scheme="http://blog.caoqs.com/categories/verdaccio/"/>
+    
+      <category term="npm" scheme="http://blog.caoqs.com/categories/verdaccio/npm/"/>
+    
+    
+      <category term="verdaccio" scheme="http://blog.caoqs.com/tags/verdaccio/"/>
+    
+      <category term="npm" scheme="http://blog.caoqs.com/tags/npm/"/>
+    
+      <category term="私有库" scheme="http://blog.caoqs.com/tags/%E7%A7%81%E6%9C%89%E5%BA%93/"/>
+    
+  </entry>
   
   <entry>
     <title>webhook配合node.js实现简单的自动化部署</title>
