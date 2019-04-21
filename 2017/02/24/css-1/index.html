@@ -438,8 +438,8 @@ p::selection{background:#000;color:#f00;}
         
             
                 <li class="post-action">
-                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                        <i class="fa fa-comment"></i>
+                    <a class="post-action-btn btn btn--default" href="#gitment">
+                         <i class="fa fa-comment"></i>
                     </a>
                 </li>
             
@@ -458,9 +458,7 @@ p::selection{background:#000;color:#f00;}
         
         
             
-                <div id="disqus_thread">
-    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
+                <div id="gitment"></div>
             
         
     </div>
@@ -534,8 +532,8 @@ p::selection{background:#000;color:#f00;}
         
             
                 <li class="post-action">
-                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
-                        <i class="fa fa-comment"></i>
+                    <a class="post-action-btn btn btn--default" href="#gitment">
+                         <i class="fa fa-comment"></i>
                     </a>
                 </li>
             
@@ -883,22 +881,34 @@ p::selection{background:#000;color:#f00;}
 <!--SCRIPTS END-->
 
     
-        <script>
-             var disqus_config = function () {
-                 this.page.url = 'http://blog.caoqs.com/2017/02/24/css-1/';
-                 
-                    this.page.identifier = '2017/02/24/css-1/';
-                 
-             };
+        <script type="text/javascript">
             (function() {
-                var d = document, s = d.createElement('script');
-                var disqus_shortname = 'caoqisen';
-                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-                s.setAttribute('data-timestamp', +new Date());
-                (d.head || d.body).appendChild(s);
+                function render() {
+                    new Gitment({
+                        id: 'http://blog.caoqs.com/2017/02/24/css-1/',
+                        owner: 'godIsAProgrammer',
+                        repo: 'https://github.com/godIsAProgrammer/myblog',
+                        oauth: {
+                            client_id: '986c32a307b6d2b74fd8',
+                            client_secret: '3be37c6eed58fbc62f43f308d582f1e9042cab31',
+                        }
+                    }).render('gitment');
+                }
+                var gc = document.createElement('script');
+                gc.type = 'text/javascript';
+                gc.src = '//imsun.github.io/gitment/dist/gitment.browser.js';
+                gc.charset = 'UTF-8';
+                gc.onload = render;
+                gc.async = true;
+                document.querySelector('body').appendChild(gc);
+                var gcs = document.createElement('link');
+                gcs.href = '//imsun.github.io/gitment/style/default.css';
+                gcs.type = 'text/css';
+                gcs.rel = 'stylesheet';
+                gcs.media = 'screen,print';
+                document.querySelector('head').appendChild(gcs);
             })();
-        </script>
+	    </script>
     
 
 
